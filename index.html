@@ -352,6 +352,33 @@
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
+    /* ===== DRAG GHOST MOBILE ===== */
+    .item-dragging {
+      opacity: 1 !important;
+      background: white !important;
+      border-radius: 22px !important;
+      padding: 10px 16px !important;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.45) !important;
+      border: 3px solid #2196f3 !important;
+      transform: scale(1.12) rotate(2deg) !important;
+      z-index: 99999 !important;
+      pointer-events: none !important;
+      font-size: 20px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      cursor: grabbing !important;
+    }
+    .sortable-chosen {
+      opacity: 0.5;
+      transform: scale(0.97);
+    }
+    .sortable-ghost {
+      opacity: 0.25;
+      background: #e3f2fd !important;
+      border: 2px dashed #2196f3 !important;
+    }
+
     /* ===== TABLET ===== */
     @media (min-width: 769px) and (max-width: 1024px) {
       .main-area { padding: 14px 20px 10px 35%; }
@@ -769,9 +796,19 @@
 
   ['start-zone','zone-rosso','zone-giallo','zone-verde'].forEach(id => {
     Sortable.create(document.getElementById(id), {
-      group: 'alimenti', animation: 220,
-      draggable: '.item', filter: '.zone-icon-fixed',
-      onAdd: handleDrop, onUpdate: handleDrop
+      group: 'alimenti',
+      animation: 150,
+      draggable: '.item',
+      filter: '.zone-icon-fixed',
+      forceFallback: true,
+      fallbackClass: 'item-dragging',
+      fallbackOnBody: true,
+      fallbackTolerance: 5,
+      delay: 80,
+      delayOnTouchOnly: true,
+      touchStartThreshold: 4,
+      onAdd: handleDrop,
+      onUpdate: handleDrop
     });
   });
 
