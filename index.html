@@ -394,50 +394,97 @@
       .item { font-size: 18px; }
     }
 
-    /* ===== MOBILE ===== */
-    @media (max-width: 768px) {
-      body {
-        overflow-y: auto;
-        height: auto;
-        min-height: 100vh;
-        background-image: url('assets/image/background/background.jpg');
-        background-position: center top;
-      }
-      .top-controls { display: none !important; }
-      .mobile-bottom-controls {
-        display: flex;
-        justify-content: center;
-        gap: 14px;
-        padding: 12px 16px 22px;
-        background: rgba(0,0,0,0.25);
-        backdrop-filter: blur(8px);
-      }
-      .mobile-bottom-controls .btn-ctrl {
-        font-size: 14px; padding: 10px 24px; border-radius: 50px;
-        font-weight: bold; cursor: pointer; border: 2px solid transparent;
-        color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: all 0.2s;
-      }
-      .mobile-bottom-controls #btn-about-mobile { background: #2196f3; border-color: #1976d2; }
-      .mobile-bottom-controls #btn-reset-mobile { background: #4caf50; border-color: #45a049; }
-      .main-area { padding: 10px 12px; justify-content: center; align-items: flex-start; }
-      .panel { max-width: 100%; }
-      .panel-title { font-size: 16px; padding: 10px 14px; letter-spacing: 1px; }
-      .dropzone { min-height: 60px; padding: 10px 10px 10px 48px; gap: 6px; }
-      .zone-icon-fixed { font-size: 22px; left: 10px; }
-      .item { font-size: 16px; padding: 6px 10px; gap: 5px; }
-      .item .label { font-size: 11px; }
-      .bottom-area { padding: 8px 12px 10px; }
-      #start-zone { min-height: 70px; padding: 10px 14px; gap: 8px; }
-      #global-status { font-size: 14px; padding: 6px 12px; }
-      .success-card { padding: 28px 24px; }
-      .success-title { font-size: 36px; }
-      .success-subtitle { font-size: 16px; }
-      .success-score { font-size: 20px; padding: 12px 20px; }
-      .btn-play-again { font-size: 18px; padding: 14px 32px; }
-      #settings-panel { min-width: unset; width: 92%; padding: 20px 18px; }
-      #about-panel { width: 92%; padding: 24px 20px; }
-      #calib-overlay { min-width: unset; width: 90%; }
-    }
+@media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  body {
+    overflow: hidden;
+    height: 100vh;
+    background-image: url('assets/image/background/background-mobile.jpg');
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+  }
+  .top-controls { display: none !important; }
+  .mobile-bottom-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 6px 12px 8px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    flex-shrink: 0;
+  }
+  .mobile-bottom-controls .btn-ctrl {
+    font-size: 12px; padding: 7px 18px; border-radius: 50px;
+    font-weight: bold; cursor: pointer; border: 2px solid transparent;
+    color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+  .mobile-bottom-controls #btn-about-mobile { background: #2196f3; border-color: #1976d2; }
+  .mobile-bottom-controls #btn-reset-mobile { background: #4caf50; border-color: #45a049; }
+
+  .main-area {
+    padding: 6px 10px 4px;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+    overflow: hidden;
+  }
+  .panel { max-width: 100%; gap: 5px; }
+  .panel-title {
+    font-size: 13px; padding: 7px 10px; letter-spacing: 0.5px;
+    border-radius: 10px;
+  }
+  .zones-wrapper {
+    padding: 6px; gap: 4px; border-radius: 10px;
+  }
+  .dropzone {
+    min-height: 44px; padding: 6px 8px 6px 40px; gap: 4px;
+    border-radius: 8px;
+  }
+  .zone-icon-fixed { font-size: 18px; left: 8px; }
+  .item {
+    font-size: 14px; padding: 4px 8px; gap: 4px;
+    border-radius: 16px;
+  }
+  .item .label { font-size: 10px; }
+  .item .check { font-size: 12px; min-width: 14px; }
+
+  #global-status {
+    font-size: 12px; padding: 4px 10px;
+    border-radius: 8px;
+  }
+
+  .bottom-area {
+    padding: 4px 10px 6px;
+    flex-shrink: 0;
+  }
+  #start-zone {
+    min-height: 54px; padding: 6px 10px; gap: 5px;
+    border-radius: 10px;
+  }
+
+  .success-card { padding: 20px 18px; }
+  .success-title { font-size: 30px; }
+  .success-subtitle { font-size: 14px; }
+  .success-score { font-size: 18px; padding: 10px 18px; }
+  .btn-play-again { font-size: 16px; padding: 12px 28px; }
+  .success-stars { font-size: 32px; }
+  .success-emojis { font-size: 26px; }
+  .success-message { font-size: 15px; }
+
+  #settings-panel { min-width: unset; width: 92%; padding: 20px 18px; }
+  #about-panel { width: 92%; padding: 24px 20px; }
+  #calib-overlay { min-width: unset; width: 90%; }
+
+  .touch-ghost {
+    font-size: 18px !important;
+    padding: 10px 16px !important;
+    min-width: 110px !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -905,6 +952,7 @@
 </script>
 </body>
 </html>
+
 
 
 
