@@ -921,15 +921,9 @@
     moveGhost(t.clientX, t.clientY);
   }, { passive: true });
 
-  document.addEventListener('touchend', e => {
-    if (touchGhost) {
-      // Nasconde il ghost PRIMA che SortableJS processi il drop
-      touchGhost.style.display = 'none';
-      // Piccolo delay per dare tempo a SortableJS di rilevare la zona
-      requestAnimationFrame(() => removeGhost());
-    }
-  });
+  document.addEventListener('touchend',    removeGhost);
   document.addEventListener('touchcancel', removeGhost);
+
 
   // Mouse
   document.addEventListener('mousedown', e => {
@@ -952,4 +946,5 @@
 </script>
 </body>
 </html>
+
 
