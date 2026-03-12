@@ -162,16 +162,12 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .btn-play-again:hover {
-      transform: scale(1.07) translateY(-3px);
-      box-shadow: 0 14px 35px rgba(255,111,0,0.6);
-    }
+    .btn-play-again:hover { transform: scale(1.07) translateY(-3px); box-shadow: 0 14px 35px rgba(255,111,0,0.6); }
     .btn-play-again:active { transform: scale(0.97); }
 
     .confetti-piece {
       position: fixed;
-      width: 12px;
-      height: 12px;
+      width: 12px; height: 12px;
       border-radius: 2px;
       pointer-events: none;
       z-index: 49999;
@@ -253,9 +249,7 @@
       background: #f5f5f5; border-radius: 12px;
       padding: 16px; margin-bottom: 12px; text-align: left;
     }
-    #about-panel .about-box p {
-      margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #333;
-    }
+    #about-panel .about-box p { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #333; }
     #about-panel .about-box p:last-child { margin: 0; }
     #about-panel .about-goal {
       background: #e8f5e9; border-radius: 12px;
@@ -357,7 +351,6 @@
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
-    /* Ghost touch manuale */
     .touch-ghost {
       position: fixed;
       pointer-events: none;
@@ -378,15 +371,11 @@
       white-space: nowrap;
       will-change: left, top;
     }
+
     .sortable-chosen { opacity: 0.5; }
-    .sortable-ghost {
-      opacity: 0;
-      display: none !important;
-    }
-    .sortable-drag {
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
+    .sortable-ghost  { opacity: 0; display: none !important; }
+    .sortable-drag   { opacity: 0 !important; pointer-events: none !important; }
+
     /* ===== TABLET ===== */
     @media (min-width: 769px) and (max-width: 1024px) {
       .main-area { padding: 14px 20px 10px 35%; }
@@ -394,109 +383,95 @@
       .item { font-size: 18px; }
     }
 
-@media (max-width: 768px) {
-  html, body {
-    height: 100%;
-    height: 100dvh;
-    overflow: hidden;
-  }
-  body {
-    overflow: hidden;
-    height: 100dvh;
-    background-image: url('assets/image/background/background-mobile.jpg');
-    background-position: center top;
-    display: flex;
-    flex-direction: column;
-  }
-  .top-controls { display: none !important; }
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      html, body {
+        height: 100%;
+        height: 100dvh;
+      }
+      body {
+        height: 100dvh;
+        overflow: auto;
+        background-image: url('assets/image/background/background-mobile.jpg');
+        background-position: center top;
+        display: flex;
+        flex-direction: column;
+      }
+      .top-controls { display: none !important; }
 
-  .main-area {
-    padding: 6px 10px 4px;
-    justify-content: center;
-    align-items: flex-start;
-    flex: 1 1 auto;
-    overflow: hidden;
-    min-height: 0;
-  }
-  .panel {
-    max-width: 100%;
-    gap: 4px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .panel-title {
-    font-size: 13px; padding: 6px 10px;
-    letter-spacing: 0.5px; border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .zones-wrapper {
-    padding: 5px; gap: 3px; border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .dropzone {
-    min-height: 40px; padding: 5px 8px 5px 38px;
-    gap: 4px; border-radius: 8px;
-  }
-  .zone-icon-fixed { font-size: 16px; left: 8px; }
-  .item {
-    font-size: 13px; padding: 4px 8px; gap: 4px;
-    border-radius: 14px;
-  }
-  .item .label { font-size: 10px; }
-  .item .check { font-size: 11px; min-width: 12px; }
-  #global-status {
-    font-size: 12px; padding: 4px 10px;
-    border-radius: 8px; flex-shrink: 0;
-  }
+      .main-area {
+        padding: 6px 10px 4px;
+        justify-content: center;
+        align-items: flex-start;
+        flex: 1 1 auto;
+        overflow: hidden;
+        min-height: 0;
+      }
+      .panel {
+        max-width: 100%;
+        gap: 4px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .panel-title {
+        font-size: 13px; padding: 6px 10px;
+        letter-spacing: 0.5px; border-radius: 10px;
+        flex-shrink: 0;
+      }
+      .zones-wrapper {
+        padding: 5px; gap: 3px; border-radius: 10px;
+        flex-shrink: 0;
+      }
+      .dropzone {
+        min-height: 40px; padding: 5px 8px 5px 38px;
+        gap: 4px; border-radius: 8px;
+      }
+      .zone-icon-fixed { font-size: 16px; left: 8px; }
+      .item { font-size: 13px; padding: 4px 8px; gap: 4px; border-radius: 14px; }
+      .item .label { font-size: 10px; }
+      .item .check { font-size: 11px; min-width: 12px; }
+      #global-status { font-size: 12px; padding: 4px 10px; border-radius: 8px; flex-shrink: 0; }
 
-  .bottom-area {
-    padding: 3px 10px 3px;
-    flex-shrink: 0;
-  }
-  #start-zone {
-    min-height: 0;
-    padding: 6px 10px;
-    gap: 5px;
-    border-radius: 10px;
-  }
+      .bottom-area { padding: 3px 10px 3px; flex-shrink: 0; }
+      #start-zone { min-height: 0; padding: 6px 10px; gap: 5px; border-radius: 10px; }
 
-  .mobile-bottom-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 4px 12px 6px;
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(8px);
-    flex-shrink: 0;
-  }
-  .mobile-bottom-controls .btn-ctrl {
-    font-size: 12px; padding: 7px 18px; border-radius: 50px;
-    font-weight: bold; cursor: pointer; border: 2px solid transparent;
-    color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-  }
-  .mobile-bottom-controls #btn-about-mobile { background: #2196f3; border-color: #1976d2; }
-  .mobile-bottom-controls #btn-reset-mobile { background: #4caf50; border-color: #45a049; }
+      .mobile-bottom-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        padding: 4px 12px 6px;
+        background: rgba(0,0,0,0.25);
+        backdrop-filter: blur(8px);
+        flex-shrink: 0;
+      }
+      .mobile-bottom-controls .btn-ctrl {
+        font-size: 12px; padding: 7px 18px; border-radius: 50px;
+        font-weight: bold; cursor: pointer; border: 2px solid transparent;
+        color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+      }
+      .mobile-bottom-controls #btn-about-mobile { background: #2196f3; border-color: #1976d2; }
+      .mobile-bottom-controls #btn-reset-mobile { background: #4caf50; border-color: #45a049; }
 
-  .success-card { padding: 20px 18px; }
-  .success-title { font-size: 30px; }
-  .success-subtitle { font-size: 14px; }
-  .success-score { font-size: 18px; padding: 10px 18px; }
-  .btn-play-again { font-size: 16px; padding: 12px 28px; }
-  .success-stars { font-size: 32px; }
-  .success-emojis { font-size: 26px; }
-  .success-message { font-size: 15px; }
+      .success-card { padding: 20px 18px; }
+      .success-title { font-size: 30px; }
+      .success-subtitle { font-size: 14px; }
+      .success-score { font-size: 18px; padding: 10px 18px; }
+      .btn-play-again { font-size: 16px; padding: 12px 28px; }
+      .success-stars { font-size: 32px; }
+      .success-emojis { font-size: 26px; }
+      .success-message { font-size: 15px; }
 
-  #settings-panel { min-width: unset; width: 92%; padding: 20px 18px; }
-  #about-panel { width: 92%; padding: 24px 20px; }
-  #calib-overlay { min-width: unset; width: 90%; }
+      #settings-panel { min-width: unset; width: 92%; padding: 20px 18px; }
+      #about-panel { width: 92%; padding: 24px 20px; }
+      #calib-overlay { min-width: unset; width: 90%; }
 
-  .touch-ghost {
-    font-size: 18px !important;
-    padding: 10px 16px !important;
-    min-width: 110px !important;
-  }
-}
+      .touch-ghost {
+        font-size: 18px !important;
+        padding: 10px 16px !important;
+        min-width: 110px !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -872,7 +847,6 @@
   document.getElementById('btn-reset').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
   document.getElementById('btn-reset-mobile').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
 
-  // ===== SORTABLE — nessun ghost nativo, usiamo il nostro =====
   ['start-zone','zone-rosso','zone-giallo','zone-verde'].forEach(id => {
     Sortable.create(document.getElementById(id), {
       group: 'alimenti',
@@ -880,7 +854,7 @@
       draggable: '.item',
       filter: '.zone-icon-fixed',
       forceFallback: true,
-      fallbackClass: '',       // nessun ghost SortableJS
+      fallbackClass: '',
       fallbackOnBody: true,
       fallbackTolerance: 5,
       delay: 80,
@@ -891,13 +865,18 @@
     });
   });
 
+  // Blocca drag nativo browser
+  document.addEventListener('dragstart', e => {
+    if (e.target.closest('.item')) e.preventDefault();
+  });
+
   document.querySelectorAll('.dropzone').forEach(zone => {
     zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
     zone.addEventListener('drop', () => zone.classList.remove('drag-over'));
   });
 
-  // ===== GHOST MANUALE — segue esattamente dito e cursore =====
+  // ===== GHOST MANUALE =====
   let touchGhost = null;
   let ghostOffX = 0, ghostOffY = 0;
 
@@ -906,7 +885,6 @@
     const rect = item.getBoundingClientRect();
     ghostOffX = clientX - rect.left;
     ghostOffY = clientY - rect.top;
-
     touchGhost = item.cloneNode(true);
     touchGhost.className = 'touch-ghost';
     touchGhost.style.left = (clientX - ghostOffX) + 'px';
@@ -931,7 +909,7 @@
     const t = e.touches[0];
     createGhost(item, t.clientX, t.clientY);
   }, { passive: true });
-  // Blocca lo scroll della pagina quando si trascina un item
+
   document.addEventListener('touchmove', e => {
     if (touchGhost) e.preventDefault();
   }, { passive: false });
@@ -941,10 +919,17 @@
     moveGhost(t.clientX, t.clientY);
   }, { passive: true });
 
-  document.addEventListener('touchend',   removeGhost);
+  document.addEventListener('touchend', e => {
+    if (touchGhost) {
+      // Nasconde il ghost PRIMA che SortableJS processi il drop
+      touchGhost.style.display = 'none';
+      // Piccolo delay per dare tempo a SortableJS di rilevare la zona
+      requestAnimationFrame(() => removeGhost());
+    }
+  });
   document.addEventListener('touchcancel', removeGhost);
 
-  // Mouse (desktop)
+  // Mouse
   document.addEventListener('mousedown', e => {
     if (e.button !== 0) return;
     const item = e.target.closest('.item');
@@ -953,10 +938,11 @@
   });
 
   document.addEventListener('mousemove', e => {
-  if (!touchGhost) return;
-  if (e.buttons === 0) { removeGhost(); return; } // tasto già rilasciato
-  moveGhost(e.clientX, e.clientY);
+    if (!touchGhost) return;
+    if (e.buttons === 0) { removeGhost(); return; }
+    moveGhost(e.clientX, e.clientY);
   });
+
   window.addEventListener('mouseup',    removeGhost);
   window.addEventListener('mouseleave', removeGhost);
 
@@ -964,14 +950,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
