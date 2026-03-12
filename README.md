@@ -118,14 +118,28 @@ L'obiettivo è sensibilizzare i bambini a scegliere in modo consapevole
 cosa mangiare durante la merenda quotidiana.
 
 ---
-
 ## 👤 Autore
 
- **Fra702sco**   
-🔗 [github.com/Fra702sco](https://github.com/Fra702sco)
+**Il Semaforo della Merenda** è un progetto educativo interattivo realizzato
+nell'ambito del programma **"La Salute a Tavola e in Palestra"** a Nicotera (VV), Calabria 🇮🇹
+
+### 🧑‍💻 Autore
+- **Ideazione, design e coordinamento**: [Francesco Taccone] ([@Fra702sco](https://github.com/Fra702sco))
+- **Sviluppo del codice**: Realizzato con il supporto di **Perplexity AI**
+
+### 🎯 Obiettivo
+Sensibilizzare i bambini delle scuole primarie a scegliere in modo
+consapevole cosa mangiare durante la merenda quotidiana,
+attraverso un gioco interattivo e divertente.
+
+### 🏫 Contesto
+Progetto sviluppato durante il **Servizio Civile** 2025/2026
+presso il comune di Nicotera (VV), Calabria.
+
+### 🤝 Ringraziamenti
+- [Perplexity AI](https://perplexity.ai) — Supporto allo sviluppo del codice
 
 ---
-
 ## 📄 Licenza
 
 Questo progetto è distribuito sotto licenza  
