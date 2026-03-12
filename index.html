@@ -14,7 +14,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      background-image: url('assets/image/background/background.jpg');
+      background-image: url('assets/image/background/background-mobile.jpg');
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
@@ -380,11 +380,13 @@
     }
     .sortable-chosen { opacity: 0.5; }
     .sortable-ghost {
-      opacity: 0.25;
-      background: #e3f2fd !important;
-      border: 2px dashed #2196f3 !important;
+      opacity: 0;
+      display: none !important;
     }
-
+    .sortable-drag {
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
     /* ===== TABLET ===== */
     @media (min-width: 769px) and (max-width: 1024px) {
       .main-area { padding: 14px 20px 10px 35%; }
@@ -398,7 +400,7 @@
         overflow-y: auto;
         height: auto;
         min-height: 100vh;
-        background-image: url('assets/image/background/background-mobile.jpg');
+        background-image: url('assets/image/background/background.jpg');
         background-position: center top;
       }
       .top-controls { display: none !important; }
@@ -818,7 +820,7 @@
       animation: 220,
       draggable: '.item',
       filter: '.zone-icon-fixed',
-      forceFallback: false,
+      forceFallback: true,
       fallbackClass: '',       // nessun ghost SortableJS
       fallbackOnBody: true,
       fallbackTolerance: 5,
@@ -899,8 +901,6 @@
 </script>
 </body>
 </html>
-
-
 
 
 
