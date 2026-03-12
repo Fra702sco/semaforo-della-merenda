@@ -70,116 +70,64 @@
       70%  { transform: scale(1.08) rotate(2deg); }
       100% { transform: scale(1) rotate(0deg); opacity: 1; }
     }
-
     .success-stars {
-      font-size: 48px;
-      letter-spacing: 6px;
+      font-size: 48px; letter-spacing: 6px;
       animation: starsBounce 1s ease infinite alternate;
-      display: block;
-      margin-bottom: 10px;
+      display: block; margin-bottom: 10px;
     }
     @keyframes starsBounce {
       from { transform: scale(1) rotate(-3deg); }
       to   { transform: scale(1.12) rotate(3deg); }
     }
-
     .success-title {
-      font-size: 52px;
-      font-weight: 900;
+      font-size: 52px; font-weight: 900;
       background: linear-gradient(135deg, #ff6f00, #ff9800, #ffd600);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1.1;
-      margin: 10px 0 6px;
-      text-shadow: none;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.1; margin: 10px 0 6px;
       animation: titlePulse 1.5s ease infinite alternate;
     }
     @keyframes titlePulse {
-      from { filter: brightness(1); }
-      to   { filter: brightness(1.2); }
+      from { filter: brightness(1); } to { filter: brightness(1.2); }
     }
-
-    .success-subtitle {
-      font-size: 22px;
-      color: #5d4037;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
+    .success-subtitle { font-size: 22px; color: #5d4037; margin-bottom: 20px; font-weight: 700; }
     .success-score {
       background: linear-gradient(135deg, #43a047, #2e7d32);
-      color: white;
-      border-radius: 20px;
-      padding: 16px 32px;
-      font-size: 26px;
-      font-weight: 900;
-      margin: 18px auto;
-      display: inline-block;
+      color: white; border-radius: 20px; padding: 16px 32px;
+      font-size: 26px; font-weight: 900; margin: 18px auto; display: inline-block;
       box-shadow: 0 6px 20px rgba(67,160,71,0.5);
       animation: scoreBounce 0.8s 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
     }
     @keyframes scoreBounce {
-      0%   { transform: scale(0); opacity: 0; }
-      80%  { transform: scale(1.1); }
-      100% { transform: scale(1); opacity: 1; }
+      0%{transform:scale(0);opacity:0} 80%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1}
     }
-
     .success-emojis {
-      font-size: 36px;
-      margin: 14px 0;
-      animation: emojiSpin 3s linear infinite;
-      display: block;
+      font-size: 36px; margin: 14px 0;
+      animation: emojiSpin 3s linear infinite; display: block;
     }
     @keyframes emojiSpin {
-      0%   { letter-spacing: 4px; }
-      50%  { letter-spacing: 14px; }
-      100% { letter-spacing: 4px; }
+      0%{letter-spacing:4px} 50%{letter-spacing:14px} 100%{letter-spacing:4px}
     }
-
-    .success-message {
-      font-size: 19px;
-      color: #4e342e;
-      margin-bottom: 28px;
-      line-height: 1.5;
-    }
-
+    .success-message { font-size: 19px; color: #4e342e; margin-bottom: 28px; line-height: 1.5; }
     .btn-play-again {
       background: linear-gradient(135deg, #ff6f00, #ff9800);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 18px 48px;
-      font-size: 22px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255,111,0,0.5);
-      transition: all 0.2s;
-      letter-spacing: 1px;
-      animation: btnAppear 0.5s 1s both;
+      color: white; border: none; border-radius: 50px; padding: 18px 48px;
+      font-size: 22px; font-weight: 900; cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,111,0,0.5); transition: all 0.2s;
+      letter-spacing: 1px; animation: btnAppear 0.5s 1s both;
     }
     @keyframes btnAppear {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)}
     }
-    .btn-play-again:hover {
-      transform: scale(1.07) translateY(-3px);
-      box-shadow: 0 14px 35px rgba(255,111,0,0.6);
-    }
+    .btn-play-again:hover { transform: scale(1.07) translateY(-3px); box-shadow: 0 14px 35px rgba(255,111,0,0.6); }
     .btn-play-again:active { transform: scale(0.97); }
 
     .confetti-piece {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      border-radius: 2px;
-      pointer-events: none;
-      z-index: 49999;
-      animation: confettiFall linear forwards;
+      position: fixed; width: 12px; height: 12px; border-radius: 2px;
+      pointer-events: none; z-index: 49999; animation: confettiFall linear forwards;
     }
     @keyframes confettiFall {
-      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+      0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+      100%{transform:translateY(110vh) rotate(720deg);opacity:0.3}
     }
 
     body.calibrating { cursor: crosshair !important; }
@@ -188,26 +136,21 @@
     body.calibrating .top-controls { pointer-events: none; }
 
     #calib-overlay {
-      display: none;
-      position: fixed;
-      bottom: 30px; left: 50%;
+      display: none; position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%);
       background: rgba(0,0,0,0.88); color: white;
       padding: 16px 28px; border-radius: 14px;
-      font-size: 16px; text-align: center;
-      z-index: 9999; pointer-events: none;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.5); min-width: 360px;
+      font-size: 16px; text-align: center; z-index: 9999;
+      pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,0.5); min-width: 360px;
     }
     #calib-overlay.show { display: block; }
     #calib-overlay .step { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
     #calib-overlay .hint { font-size: 13px; color: #aaa; margin-top: 6px; }
 
     #settings-panel {
-      display: none;
-      position: fixed; top: 50%; left: 50%;
+      display: none; position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.98);
-      border-radius: 16px; padding: 28px 32px;
+      background: rgba(255,255,255,0.98); border-radius: 16px; padding: 28px 32px;
       z-index: 10000; box-shadow: 0 16px 50px rgba(0,0,0,0.5);
       min-width: 420px; border: 3px solid #ddd;
     }
@@ -216,9 +159,8 @@
     .settings-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
     .settings-row label { font-weight: bold; font-size: 15px; width: 90px; flex-shrink: 0; }
     .settings-row input {
-      width: 90px; padding: 6px 10px;
-      border: 2px solid #ccc; border-radius: 8px;
-      font-size: 15px; text-align: center;
+      width: 90px; padding: 6px 10px; border: 2px solid #ccc;
+      border-radius: 8px; font-size: 15px; text-align: center;
     }
     .settings-row input:focus { outline: none; border-color: #2196f3; }
     .settings-row span { font-size: 13px; color: #888; }
@@ -234,50 +176,40 @@
     .settings-note { text-align: center; font-size: 12px; color: #999; margin-top: 14px; }
 
     #about-panel {
-      display: none;
-      position: fixed; top: 50%; left: 50%;
+      display: none; position: fixed; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.98);
-      border-radius: 20px; padding: 32px 36px;
+      background: rgba(255,255,255,0.98); border-radius: 20px; padding: 32px 36px;
       z-index: 10000; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      max-width: 480px; width: 90%;
-      border: 3px solid #e3f2fd;
-      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
-      text-align: center;
+      max-width: 480px; width: 90%; border: 3px solid #e3f2fd;
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif; text-align: center;
     }
     #about-panel.show { display: block; }
     #about-panel .about-emoji { font-size: 40px; margin-bottom: 10px; }
     #about-panel h2 { color: #1976d2; font-size: 22px; margin-bottom: 4px; }
     #about-panel .about-subtitle { color: #888; font-size: 13px; margin-bottom: 20px; }
     #about-panel .about-box {
-      background: #f5f5f5; border-radius: 12px;
-      padding: 16px; margin-bottom: 12px; text-align: left;
+      background: #f5f5f5; border-radius: 12px; padding: 16px; margin-bottom: 12px; text-align: left;
     }
-    #about-panel .about-box p {
-      margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #333;
-    }
+    #about-panel .about-box p { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #333; }
     #about-panel .about-box p:last-child { margin: 0; }
     #about-panel .about-goal {
-      background: #e8f5e9; border-radius: 12px;
-      padding: 12px; margin-bottom: 16px;
+      background: #e8f5e9; border-radius: 12px; padding: 12px; margin-bottom: 16px;
       font-size: 13px; color: #2e7d32; line-height: 1.5;
     }
     #about-panel .about-license { font-size: 12px; color: #aaa; margin-bottom: 20px; }
     #btn-about-close {
-      background: #1976d2; color: white; border: none;
-      border-radius: 50px; padding: 10px 28px;
-      font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.2s;
+      background: #1976d2; color: white; border: none; border-radius: 50px;
+      padding: 10px 28px; font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.2s;
     }
     #btn-about-close:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
+    /* ===== TOP CONTROLS DESKTOP ===== */
     .top-controls {
-      position: fixed; top: 14px; right: 14px;
-      display: flex; gap: 8px; z-index: 999;
+      position: fixed; top: 14px; right: 14px; display: flex; gap: 8px; z-index: 999;
     }
     .btn-ctrl {
-      border-radius: 20px; padding: 8px 16px;
-      font-size: 13px; font-weight: bold; cursor: pointer;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      border-radius: 20px; padding: 8px 16px; font-size: 13px; font-weight: bold;
+      cursor: pointer; box-shadow: 0 3px 12px rgba(0,0,0,0.25);
       transition: all 0.2s; border: 2px solid transparent; color: white;
     }
     .btn-ctrl:hover { transform: translateY(-1px); filter: brightness(1.1); }
@@ -286,6 +218,11 @@
     #btn-settings { background: #9c27b0; border-color: #7b1fa2; }
     #btn-about    { background: #2196f3; border-color: #1976d2; }
 
+    /* ===== BOTTOM MOBILE CONTROLS (nascosti su desktop) ===== */
+    .mobile-bottom-controls {
+      display: none;
+    }
+
     .main-area {
       flex: 1; display: flex; align-items: center;
       justify-content: flex-end; padding: 14px 40px 10px 42%;
@@ -293,12 +230,11 @@
     .panel { width: 100%; max-width: 850px; display: flex; flex-direction: column; gap: 10px; }
     .panel-title {
       background: linear-gradient(135deg, #29b8d8, #1e8bc3);
-      border-radius: 14px; padding: 14px 24px;
-      font-size: 26px; font-weight: 900; color: white;
-      text-transform: uppercase; letter-spacing: 2px;
+      border-radius: 14px; padding: 14px 24px; font-size: 26px; font-weight: 900;
+      color: white; text-transform: uppercase; letter-spacing: 2px;
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-      border: 3px solid #1a9ab8; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25); border: 3px solid #1a9ab8;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     .zones-wrapper {
       background: rgba(255,255,255,0.35); backdrop-filter: blur(8px);
@@ -307,18 +243,16 @@
     }
     .zone-wrapper { position: relative; }
     .dropzone {
-      border-radius: 12px; padding: 12px 16px 12px 56px;
-      min-height: 78px; display: flex; flex-wrap: wrap;
-      gap: 8px; align-items: center; transition: filter 0.2s;
+      border-radius: 12px; padding: 12px 16px 12px 56px; min-height: 78px;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center; transition: filter 0.2s;
     }
     .dropzone.drag-over { filter: brightness(1.15); }
     #zone-rosso  { background: linear-gradient(135deg, #c62828, #a31515); border: 3px solid #8b0000; }
     #zone-giallo { background: linear-gradient(135deg, #f9a825, #c77800); border: 3px solid #b56500; }
     #zone-verde  { background: linear-gradient(135deg, #2e7d32, #1a5c1e); border: 3px solid #0d4410; }
     .zone-icon-fixed {
-      position: absolute; left: 14px; top: 50%;
-      transform: translateY(-50%); font-size: 28px;
-      width: 38px; text-align: center;
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 28px; width: 38px; text-align: center;
       pointer-events: none; user-select: none; z-index: 5;
     }
     #global-status {
@@ -337,10 +271,8 @@
     }
     .item {
       background: white; border-radius: 22px; padding: 7px 14px;
-      display: flex; align-items: center; gap: 7px;
-      font-size: 20px; cursor: grab;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-      transition: all 0.2s; user-select: none;
+      display: flex; align-items: center; gap: 7px; font-size: 20px; cursor: grab;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2); transition: all 0.2s; user-select: none;
       border: 2px solid rgba(220,220,220,0.8);
     }
     .item:active { cursor: grabbing; }
@@ -352,31 +284,32 @@
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
-    /* ===== DRAG GHOST MOBILE ===== */
-    .item-dragging {
-      opacity: 1 !important;
-      background: white !important;
-      border-radius: 22px !important;
-      padding: 10px 16px !important;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.45) !important;
-      border: 3px solid #2196f3 !important;
-      transform: scale(1.12) rotate(2deg) !important;
-      z-index: 99999 !important;
-      pointer-events: none !important;
-      font-size: 20px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 7px !important;
-      cursor: grabbing !important;
-    }
-    .sortable-chosen {
-      opacity: 0.5;
-      transform: scale(0.97);
-    }
+    /* ===== SORTABLE GHOST (desktop: zona placeholder) ===== */
     .sortable-ghost {
       opacity: 0.25;
       background: #e3f2fd !important;
       border: 2px dashed #2196f3 !important;
+    }
+    .sortable-chosen { opacity: 0.5; }
+
+    /* ===== DRAG GHOST TOUCH — segue il dito ===== */
+    .item-dragging {
+      position: fixed !important;
+      pointer-events: none !important;
+      z-index: 99999 !important;
+      opacity: 1 !important;
+      background: white !important;
+      border-radius: 22px !important;
+      padding: 10px 16px !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 3px #2196f3 !important;
+      border: 3px solid #2196f3 !important;
+      font-size: 20px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      transform: scale(1.18) rotate(3deg) !important;
+      transition: transform 0.08s ease !important;
+      will-change: transform, left, top;
     }
 
     /* ===== TABLET ===== */
@@ -392,20 +325,36 @@
         overflow-y: auto;
         height: auto;
         min-height: 100vh;
-        background-position: left top;
+        background-image: url('assets/image/background/background-mobile.jpg');
+        background-position: center top;
       }
-      .top-controls {
-        position: relative;
-        top: auto; right: auto;
+
+      /* Nasconde i 4 pulsanti in alto */
+      .top-controls { display: none !important; }
+
+      /* Mostra i 2 pulsanti in basso */
+      .mobile-bottom-controls {
         display: flex;
-        flex-wrap: wrap;
         justify-content: center;
-        gap: 6px;
-        padding: 10px;
-        background: rgba(0,0,0,0.3);
+        gap: 14px;
+        padding: 12px 16px 22px;
+        background: rgba(0,0,0,0.25);
         backdrop-filter: blur(8px);
       }
-      .btn-ctrl { font-size: 11px; padding: 6px 12px; }
+      .mobile-bottom-controls .btn-ctrl {
+        font-size: 14px;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        border: 2px solid transparent;
+        color: white;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        transition: all 0.2s;
+      }
+      .mobile-bottom-controls #btn-about-mobile  { background: #2196f3; border-color: #1976d2; }
+      .mobile-bottom-controls #btn-reset-mobile  { background: #4caf50; border-color: #45a049; }
+
       .main-area {
         padding: 10px 12px;
         justify-content: center;
@@ -417,7 +366,7 @@
       .zone-icon-fixed { font-size: 22px; left: 10px; }
       .item { font-size: 16px; padding: 6px 10px; gap: 5px; }
       .item .label { font-size: 11px; }
-      .bottom-area { padding: 8px 12px 20px; }
+      .bottom-area { padding: 8px 12px 10px; }
       #start-zone { min-height: 70px; padding: 10px 14px; gap: 8px; }
       #global-status { font-size: 14px; padding: 6px 12px; }
       .success-card { padding: 28px 24px; }
@@ -438,6 +387,7 @@
   <div id="glow-green"  class="light-glow"></div>
   <div id="calib-overlay"></div>
 
+  <!-- SCHERMATA SUCCESSO -->
   <div id="success-screen">
     <div class="success-card">
       <span class="success-stars">⭐🌟⭐🌟⭐</span>
@@ -454,6 +404,7 @@
     </div>
   </div>
 
+  <!-- PANNELLO IMPOSTAZIONI -->
   <div id="settings-panel">
     <h3>⚙️ Impostazioni Coordinate Luci</h3>
     <div class="settings-row">
@@ -479,6 +430,7 @@
     </div>
   </div>
 
+  <!-- ABOUT PANEL -->
   <div id="about-panel">
     <div class="about-emoji">🚦</div>
     <h2>Il Semaforo della Merenda</h2>
@@ -495,6 +447,7 @@
     <button id="btn-about-close">✖ Chiudi</button>
   </div>
 
+  <!-- PULSANTI DESKTOP (in alto a destra) -->
   <div class="top-controls">
     <button id="btn-about"    class="btn-ctrl">ℹ️ About</button>
     <button id="btn-settings" class="btn-ctrl">⚙️ Coordinate</button>
@@ -525,6 +478,12 @@
 
   <div class="bottom-area">
     <div id="start-zone"></div>
+  </div>
+
+  <!-- PULSANTI MOBILE (in fondo) -->
+  <div class="mobile-bottom-controls">
+    <button id="btn-about-mobile" class="btn-ctrl">ℹ️ About</button>
+    <button id="btn-reset-mobile" class="btn-ctrl">🔄 Reset</button>
   </div>
 
 <script>
@@ -562,6 +521,7 @@
   positionGlows();
   window.addEventListener('resize', positionGlows);
 
+  // SETTINGS
   const settingsPanel = document.getElementById('settings-panel');
   function openSettings() {
     document.getElementById('inp-red-x').value    = bulbCoords[0].x;
@@ -589,10 +549,14 @@
   });
   document.getElementById('btn-settings-close').addEventListener('click', () => settingsPanel.classList.remove('show'));
 
+  // ABOUT (desktop + mobile)
   const aboutPanel = document.getElementById('about-panel');
-  document.getElementById('btn-about').addEventListener('click', e => { e.stopPropagation(); aboutPanel.classList.add('show'); });
+  function openAbout(e) { e.stopPropagation(); aboutPanel.classList.add('show'); }
+  document.getElementById('btn-about').addEventListener('click', openAbout);
+  document.getElementById('btn-about-mobile').addEventListener('click', openAbout);
   document.getElementById('btn-about-close').addEventListener('click', () => aboutPanel.classList.remove('show'));
 
+  // CALIBRAZIONE
   const calibSteps = [
     { label: '🔴 Clicca sul CENTRO del bulbo ROSSO',  color: '#ef5350' },
     { label: '🟡 Clicca sul CENTRO del bulbo GIALLO', color: '#ffd600' },
@@ -618,7 +582,6 @@
       <div class="hint">Step ${calibStep+1} / 3 &nbsp;|&nbsp; ESC per annullare</div>`;
     calibOverlay.classList.add('show');
   }
-
   document.getElementById('btn-calib').addEventListener('click', e => {
     e.stopPropagation(); isCalibrating = true; calibStep = 0;
     document.body.classList.add('calibrating'); showCalibStep();
@@ -647,6 +610,7 @@
     }
   });
 
+  // CORIANDOLI
   const CONFETTI_COLORS = ['#ff6f00','#ffd600','#43a047','#2196f3','#e91e63','#9c27b0','#00bcd4','#ff5722'];
   function launchConfetti() {
     for (let i = 0; i < 120; i++) {
@@ -667,6 +631,7 @@
     }
   }
 
+  // SUCCESSO
   const successScreen = document.getElementById('success-screen');
   let correctCount = 0;
   const TOTAL = 15;
@@ -694,6 +659,7 @@
     resetGame();
   });
 
+  // ALIMENTI
   const correctZone = {
     patatine:'zone-rosso', cioccolato:'zone-rosso', brioche:'zone-rosso',
     bibita:'zone-rosso', caramella:'zone-rosso',
@@ -794,6 +760,46 @@
     setTraffic(null);
   }
 
+  // RESET mobile
+  document.getElementById('btn-reset').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
+  document.getElementById('btn-reset-mobile').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
+
+  // ===== TOUCH DRAG GHOST MANUALE =====
+  // Bypassa completamente il fallback di SortableJS per il ghost:
+  // creiamo un clone che segue ESATTAMENTE il dito in tempo reale.
+  let touchGhost = null;
+  let touchOffsetX = 0, touchOffsetY = 0;
+
+  document.addEventListener('touchstart', e => {
+    const item = e.target.closest('.item');
+    if (!item) return;
+    const touch = e.touches[0];
+    const rect = item.getBoundingClientRect();
+    touchOffsetX = touch.clientX - rect.left - rect.width / 2;
+    touchOffsetY = touch.clientY - rect.top - rect.height / 2;
+
+    // Clona l'item come ghost visivo
+    touchGhost = item.cloneNode(true);
+    touchGhost.classList.add('item-dragging');
+    touchGhost.style.width  = rect.width + 'px';
+    touchGhost.style.left   = (touch.clientX - rect.width / 2 - touchOffsetX) + 'px';
+    touchGhost.style.top    = (touch.clientY - rect.height / 2 - touchOffsetY) + 'px';
+    document.body.appendChild(touchGhost);
+  }, { passive: true });
+
+  document.addEventListener('touchmove', e => {
+    if (!touchGhost) return;
+    const touch = e.touches[0];
+    const rect = touchGhost.getBoundingClientRect();
+    touchGhost.style.left = (touch.clientX - rect.width / 2) + 'px';
+    touchGhost.style.top  = (touch.clientY - rect.height / 2) + 'px';
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (touchGhost) { touchGhost.remove(); touchGhost = null; }
+  });
+
+  // SORTABLE (ghost nativo disabilitato, usiamo il nostro touch ghost)
   ['start-zone','zone-rosso','zone-giallo','zone-verde'].forEach(id => {
     Sortable.create(document.getElementById(id), {
       group: 'alimenti',
@@ -801,12 +807,12 @@
       draggable: '.item',
       filter: '.zone-icon-fixed',
       forceFallback: true,
-      fallbackClass: 'item-dragging',
+      fallbackClass: '',        // nessun ghost di SortableJS
       fallbackOnBody: true,
-      fallbackTolerance: 5,
-      delay: 80,
+      fallbackTolerance: 3,
+      delay: 60,
       delayOnTouchOnly: true,
-      touchStartThreshold: 4,
+      touchStartThreshold: 3,
       onAdd: handleDrop,
       onUpdate: handleDrop
     });
@@ -816,10 +822,6 @@
     zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
     zone.addEventListener('drop', () => zone.classList.remove('drag-over'));
-  });
-
-  document.getElementById('btn-reset').addEventListener('click', e => {
-    e.stopPropagation(); resetGame();
   });
 
   buildItems();
