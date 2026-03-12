@@ -22,13 +22,9 @@
     }
 
     .light-glow {
-      position: fixed;
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
+      position: fixed; border-radius: 50%; opacity: 0; pointer-events: none;
       transition: opacity 0.35s ease, box-shadow 0.35s ease;
-      mix-blend-mode: screen;
-      z-index: 10;
+      mix-blend-mode: screen; z-index: 10;
     }
     #glow-red.on {
       opacity: 1;
@@ -42,88 +38,68 @@
     }
 
     #success-screen {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 50000;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(6px);
+      display: none; position: fixed; inset: 0; z-index: 50000;
+      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(6px);
     }
     #success-screen.show { display: flex; }
-
     .success-card {
       background: linear-gradient(145deg, #fffde7, #fff9c4, #fffde7);
-      border-radius: 32px;
-      padding: 48px 56px;
-      text-align: center;
-      max-width: 620px;
-      width: 90%;
+      border-radius: 32px; padding: 48px 56px; text-align: center;
+      max-width: 620px; width: 90%;
       box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 6px #ffd600, 0 0 0 12px #ff6f00;
       animation: cardPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
-      position: relative;
-      overflow: hidden;
     }
     @keyframes cardPop {
-      0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
-      70%  { transform: scale(1.08) rotate(2deg); }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+      0%{transform:scale(0.3) rotate(-10deg);opacity:0}
+      70%{transform:scale(1.08) rotate(2deg)}
+      100%{transform:scale(1) rotate(0deg);opacity:1}
     }
     .success-stars {
-      font-size: 48px; letter-spacing: 6px;
+      font-size: 48px; letter-spacing: 6px; display: block; margin-bottom: 10px;
       animation: starsBounce 1s ease infinite alternate;
-      display: block; margin-bottom: 10px;
     }
     @keyframes starsBounce {
-      from { transform: scale(1) rotate(-3deg); }
-      to   { transform: scale(1.12) rotate(3deg); }
+      from{transform:scale(1) rotate(-3deg)} to{transform:scale(1.12) rotate(3deg)}
     }
     .success-title {
-      font-size: 52px; font-weight: 900;
+      font-size: 52px; font-weight: 900; line-height: 1.1; margin: 10px 0 6px;
       background: linear-gradient(135deg, #ff6f00, #ff9800, #ffd600);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; line-height: 1.1; margin: 10px 0 6px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       animation: titlePulse 1.5s ease infinite alternate;
     }
-    @keyframes titlePulse {
-      from { filter: brightness(1); } to { filter: brightness(1.2); }
-    }
+    @keyframes titlePulse { from{filter:brightness(1)} to{filter:brightness(1.2)} }
     .success-subtitle { font-size: 22px; color: #5d4037; margin-bottom: 20px; font-weight: 700; }
     .success-score {
-      background: linear-gradient(135deg, #43a047, #2e7d32);
-      color: white; border-radius: 20px; padding: 16px 32px;
-      font-size: 26px; font-weight: 900; margin: 18px auto; display: inline-block;
-      box-shadow: 0 6px 20px rgba(67,160,71,0.5);
+      background: linear-gradient(135deg, #43a047, #2e7d32); color: white;
+      border-radius: 20px; padding: 16px 32px; font-size: 26px; font-weight: 900;
+      margin: 18px auto; display: inline-block; box-shadow: 0 6px 20px rgba(67,160,71,0.5);
       animation: scoreBounce 0.8s 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
     }
     @keyframes scoreBounce {
       0%{transform:scale(0);opacity:0} 80%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1}
     }
     .success-emojis {
-      font-size: 36px; margin: 14px 0;
-      animation: emojiSpin 3s linear infinite; display: block;
+      font-size: 36px; margin: 14px 0; display: block;
+      animation: emojiSpin 3s linear infinite;
     }
     @keyframes emojiSpin {
       0%{letter-spacing:4px} 50%{letter-spacing:14px} 100%{letter-spacing:4px}
     }
     .success-message { font-size: 19px; color: #4e342e; margin-bottom: 28px; line-height: 1.5; }
     .btn-play-again {
-      background: linear-gradient(135deg, #ff6f00, #ff9800);
-      color: white; border: none; border-radius: 50px; padding: 18px 48px;
-      font-size: 22px; font-weight: 900; cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255,111,0,0.5); transition: all 0.2s;
+      background: linear-gradient(135deg, #ff6f00, #ff9800); color: white; border: none;
+      border-radius: 50px; padding: 18px 48px; font-size: 22px; font-weight: 900;
+      cursor: pointer; box-shadow: 0 8px 25px rgba(255,111,0,0.5); transition: all 0.2s;
       letter-spacing: 1px; animation: btnAppear 0.5s 1s both;
     }
-    @keyframes btnAppear {
-      from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)}
-    }
-    .btn-play-again:hover { transform: scale(1.07) translateY(-3px); box-shadow: 0 14px 35px rgba(255,111,0,0.6); }
+    @keyframes btnAppear { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+    .btn-play-again:hover { transform: scale(1.07) translateY(-3px); }
     .btn-play-again:active { transform: scale(0.97); }
 
     .confetti-piece {
-      position: fixed; width: 12px; height: 12px; border-radius: 2px;
-      pointer-events: none; z-index: 49999; animation: confettiFall linear forwards;
+      position: fixed; border-radius: 2px; pointer-events: none;
+      z-index: 49999; animation: confettiFall linear forwards;
     }
     @keyframes confettiFall {
       0%{transform:translateY(-20px) rotate(0deg);opacity:1}
@@ -131,17 +107,15 @@
     }
 
     body.calibrating { cursor: crosshair !important; }
-    body.calibrating .panel,
-    body.calibrating .bottom-area,
+    body.calibrating .panel, body.calibrating .bottom-area,
     body.calibrating .top-controls { pointer-events: none; }
 
     #calib-overlay {
       display: none; position: fixed; bottom: 30px; left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.88); color: white;
-      padding: 16px 28px; border-radius: 14px;
-      font-size: 16px; text-align: center; z-index: 9999;
-      pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,0.5); min-width: 360px;
+      transform: translateX(-50%); background: rgba(0,0,0,0.88); color: white;
+      padding: 16px 28px; border-radius: 14px; font-size: 16px; text-align: center;
+      z-index: 9999; pointer-events: none; box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+      min-width: 360px;
     }
     #calib-overlay.show { display: block; }
     #calib-overlay .step { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
@@ -149,10 +123,9 @@
 
     #settings-panel {
       display: none; position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.98); border-radius: 16px; padding: 28px 32px;
-      z-index: 10000; box-shadow: 0 16px 50px rgba(0,0,0,0.5);
-      min-width: 420px; border: 3px solid #ddd;
+      transform: translate(-50%, -50%); background: rgba(255,255,255,0.98);
+      border-radius: 16px; padding: 28px 32px; z-index: 10000;
+      box-shadow: 0 16px 50px rgba(0,0,0,0.5); min-width: 420px; border: 3px solid #ddd;
     }
     #settings-panel.show { display: block; }
     #settings-panel h3 { text-align: center; font-size: 20px; color: #333; margin-bottom: 20px; }
@@ -177,18 +150,18 @@
 
     #about-panel {
       display: none; position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255,255,255,0.98); border-radius: 20px; padding: 32px 36px;
-      z-index: 10000; box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-      max-width: 480px; width: 90%; border: 3px solid #e3f2fd;
-      font-family: 'Arial Rounded MT Bold', Arial, sans-serif; text-align: center;
+      transform: translate(-50%, -50%); background: rgba(255,255,255,0.98);
+      border-radius: 20px; padding: 32px 36px; z-index: 10000;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4); max-width: 480px; width: 90%;
+      border: 3px solid #e3f2fd; text-align: center;
     }
     #about-panel.show { display: block; }
     #about-panel .about-emoji { font-size: 40px; margin-bottom: 10px; }
     #about-panel h2 { color: #1976d2; font-size: 22px; margin-bottom: 4px; }
     #about-panel .about-subtitle { color: #888; font-size: 13px; margin-bottom: 20px; }
     #about-panel .about-box {
-      background: #f5f5f5; border-radius: 12px; padding: 16px; margin-bottom: 12px; text-align: left;
+      background: #f5f5f5; border-radius: 12px; padding: 16px;
+      margin-bottom: 12px; text-align: left;
     }
     #about-panel .about-box p { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #333; }
     #about-panel .about-box p:last-child { margin: 0; }
@@ -203,7 +176,6 @@
     }
     #btn-about-close:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-    /* ===== TOP CONTROLS DESKTOP ===== */
     .top-controls {
       position: fixed; top: 14px; right: 14px; display: flex; gap: 8px; z-index: 999;
     }
@@ -218,10 +190,7 @@
     #btn-settings { background: #9c27b0; border-color: #7b1fa2; }
     #btn-about    { background: #2196f3; border-color: #1976d2; }
 
-    /* ===== BOTTOM MOBILE CONTROLS (nascosti su desktop) ===== */
-    .mobile-bottom-controls {
-      display: none;
-    }
+    .mobile-bottom-controls { display: none; }
 
     .main-area {
       flex: 1; display: flex; align-items: center;
@@ -276,7 +245,7 @@
       border: 2px solid rgba(220,220,220,0.8);
     }
     .item:active { cursor: grabbing; }
-    .item:hover:not(.correct):not(.wrong) { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    .item:hover:not(.correct):not(.wrong) { transform: translateY(-3px) scale(1.06); }
     .item.correct { outline: 3px solid #4caf50; background: rgba(230,255,230,0.98); animation: pulse 0.5s ease; }
     .item.wrong   { outline: 3px solid #e53935; background: rgba(255,230,230,0.98); animation: shake 0.4s ease; }
     .item .label  { font-size: 13px; font-weight: bold; color: #333; }
@@ -284,33 +253,32 @@
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
-    /* ===== SORTABLE GHOST (desktop: zona placeholder) ===== */
-    .sortable-ghost {
-      opacity: 0.25;
-      background: #e3f2fd !important;
-      border: 2px dashed #2196f3 !important;
-    }
-    .sortable-chosen { opacity: 0.5; }
-
-    /* ===== DRAG GHOST TOUCH — segue il dito ===== */
+    /* Ghost che segue il dito */
     .item-dragging {
       position: fixed !important;
       pointer-events: none !important;
       z-index: 99999 !important;
-      opacity: 1 !important;
       background: white !important;
       border-radius: 22px !important;
-      padding: 10px 16px !important;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 3px #2196f3 !important;
       border: 3px solid #2196f3 !important;
-      font-size: 20px !important;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5) !important;
       display: flex !important;
       align-items: center !important;
-      gap: 7px !important;
-      transform: scale(1.18) rotate(3deg) !important;
-      transition: transform 0.08s ease !important;
-      will-change: transform, left, top;
+      gap: 10px !important;
+      font-size: 22px !important;
+      font-weight: bold !important;
+      padding: 12px 20px !important;
+      transform: scale(1.15) rotate(2deg) !important;
+      will-change: left, top;
+      white-space: nowrap;
     }
+
+    .sortable-ghost {
+      opacity: 0.2;
+      background: #e3f2fd !important;
+      border: 2px dashed #2196f3 !important;
+    }
+    .sortable-chosen { opacity: 0.45; }
 
     /* ===== TABLET ===== */
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -322,44 +290,24 @@
     /* ===== MOBILE ===== */
     @media (max-width: 768px) {
       body {
-        overflow-y: auto;
-        height: auto;
-        min-height: 100vh;
+        overflow-y: auto; height: auto; min-height: 100vh;
         background-image: url('assets/image/background/background-mobile.jpg');
         background-position: center top;
       }
-
-      /* Nasconde i 4 pulsanti in alto */
       .top-controls { display: none !important; }
-
-      /* Mostra i 2 pulsanti in basso */
       .mobile-bottom-controls {
-        display: flex;
-        justify-content: center;
-        gap: 14px;
+        display: flex; justify-content: center; gap: 14px;
         padding: 12px 16px 22px;
-        background: rgba(0,0,0,0.25);
-        backdrop-filter: blur(8px);
+        background: rgba(0,0,0,0.25); backdrop-filter: blur(8px);
       }
       .mobile-bottom-controls .btn-ctrl {
-        font-size: 14px;
-        padding: 10px 24px;
-        border-radius: 50px;
-        font-weight: bold;
-        cursor: pointer;
-        border: 2px solid transparent;
-        color: white;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-        transition: all 0.2s;
+        font-size: 14px; padding: 10px 24px; border-radius: 50px;
+        font-weight: bold; cursor: pointer; border: 2px solid transparent;
+        color: white; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: all 0.2s;
       }
-      .mobile-bottom-controls #btn-about-mobile  { background: #2196f3; border-color: #1976d2; }
-      .mobile-bottom-controls #btn-reset-mobile  { background: #4caf50; border-color: #45a049; }
-
-      .main-area {
-        padding: 10px 12px;
-        justify-content: center;
-        align-items: flex-start;
-      }
+      .mobile-bottom-controls #btn-about-mobile { background: #2196f3; border-color: #1976d2; }
+      .mobile-bottom-controls #btn-reset-mobile { background: #4caf50; border-color: #45a049; }
+      .main-area { padding: 10px 12px; justify-content: center; align-items: flex-start; }
       .panel { max-width: 100%; }
       .panel-title { font-size: 16px; padding: 10px 14px; letter-spacing: 1px; }
       .dropzone { min-height: 60px; padding: 10px 10px 10px 48px; gap: 6px; }
@@ -387,7 +335,6 @@
   <div id="glow-green"  class="light-glow"></div>
   <div id="calib-overlay"></div>
 
-  <!-- SCHERMATA SUCCESSO -->
   <div id="success-screen">
     <div class="success-card">
       <span class="success-stars">⭐🌟⭐🌟⭐</span>
@@ -396,15 +343,13 @@
       <div class="success-score" id="success-score">15 / 15 ✅</div>
       <span class="success-emojis">🍎🥦🥛🍌🥕🥖</span>
       <div class="success-message">
-        Hai messo tutti gli alimenti<br>
-        nel <strong>posto giusto</strong>!<br>
+        Hai messo tutti gli alimenti<br>nel <strong>posto giusto</strong>!<br>
         Ora sai cosa mangiare per stare in salute! 💪
       </div>
       <button class="btn-play-again" id="btn-play-again">🔄 Gioca ancora!</button>
     </div>
   </div>
 
-  <!-- PANNELLO IMPOSTAZIONI -->
   <div id="settings-panel">
     <h3>⚙️ Impostazioni Coordinate Luci</h3>
     <div class="settings-row">
@@ -430,7 +375,6 @@
     </div>
   </div>
 
-  <!-- ABOUT PANEL -->
   <div id="about-panel">
     <div class="about-emoji">🚦</div>
     <h2>Il Semaforo della Merenda</h2>
@@ -440,14 +384,11 @@
       <p>🤖 <strong>Sviluppo codice:</strong><br>Realizzato con il supporto di <strong>Perplexity AI</strong></p>
       <p>🏫 <strong>Contesto:</strong><br>Servizio Civile 2025/2026<br>"La Salute a Tavola e in Palestra"<br>Nicotera (VV), Calabria 🇮🇹</p>
     </div>
-    <div class="about-goal">
-      🎯 <strong>Obiettivo:</strong> Insegnare ai bambini la corretta alimentazione attraverso il gioco!
-    </div>
+    <div class="about-goal">🎯 <strong>Obiettivo:</strong> Insegnare ai bambini la corretta alimentazione attraverso il gioco!</div>
     <p class="about-license">📄 Licenza CC BY-NC 4.0 · © 2026 Francesco Taccone</p>
     <button id="btn-about-close">✖ Chiudi</button>
   </div>
 
-  <!-- PULSANTI DESKTOP (in alto a destra) -->
   <div class="top-controls">
     <button id="btn-about"    class="btn-ctrl">ℹ️ About</button>
     <button id="btn-settings" class="btn-ctrl">⚙️ Coordinate</button>
@@ -480,7 +421,6 @@
     <div id="start-zone"></div>
   </div>
 
-  <!-- PULSANTI MOBILE (in fondo) -->
   <div class="mobile-bottom-controls">
     <button id="btn-about-mobile" class="btn-ctrl">ℹ️ About</button>
     <button id="btn-reset-mobile" class="btn-ctrl">🔄 Reset</button>
@@ -521,7 +461,6 @@
   positionGlows();
   window.addEventListener('resize', positionGlows);
 
-  // SETTINGS
   const settingsPanel = document.getElementById('settings-panel');
   function openSettings() {
     document.getElementById('inp-red-x').value    = bulbCoords[0].x;
@@ -549,14 +488,12 @@
   });
   document.getElementById('btn-settings-close').addEventListener('click', () => settingsPanel.classList.remove('show'));
 
-  // ABOUT (desktop + mobile)
   const aboutPanel = document.getElementById('about-panel');
   function openAbout(e) { e.stopPropagation(); aboutPanel.classList.add('show'); }
   document.getElementById('btn-about').addEventListener('click', openAbout);
   document.getElementById('btn-about-mobile').addEventListener('click', openAbout);
   document.getElementById('btn-about-close').addEventListener('click', () => aboutPanel.classList.remove('show'));
 
-  // CALIBRAZIONE
   const calibSteps = [
     { label: '🔴 Clicca sul CENTRO del bulbo ROSSO',  color: '#ef5350' },
     { label: '🟡 Clicca sul CENTRO del bulbo GIALLO', color: '#ffd600' },
@@ -610,7 +547,6 @@
     }
   });
 
-  // CORIANDOLI
   const CONFETTI_COLORS = ['#ff6f00','#ffd600','#43a047','#2196f3','#e91e63','#9c27b0','#00bcd4','#ff5722'];
   function launchConfetti() {
     for (let i = 0; i < 120; i++) {
@@ -619,19 +555,17 @@
         c.className = 'confetti-piece';
         const size = 8 + Math.random() * 14;
         c.style.cssText = `
-          left: ${Math.random() * 100}vw; top: -20px;
-          width: ${size}px; height: ${size}px;
-          background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
-          border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-          animation-duration: ${2 + Math.random() * 3}s; animation-delay: 0s;
-        `;
+          left:${Math.random()*100}vw;top:-20px;
+          width:${size}px;height:${size}px;
+          background:${CONFETTI_COLORS[Math.floor(Math.random()*CONFETTI_COLORS.length)]};
+          border-radius:${Math.random()>0.5?'50%':'2px'};
+          animation-duration:${2+Math.random()*3}s;animation-delay:0s;`;
         document.body.appendChild(c);
         setTimeout(() => c.remove(), 5500);
       }, i * 40);
     }
   }
 
-  // SUCCESSO
   const successScreen = document.getElementById('success-screen');
   let correctCount = 0;
   const TOTAL = 15;
@@ -645,8 +579,7 @@
         let blinks = 0;
         const blink = setInterval(() => {
           const g = document.getElementById('glow-green');
-          g.classList.toggle('on');
-          blinks++;
+          g.classList.toggle('on'); blinks++;
           if (blinks >= 8) { clearInterval(blink); g.classList.remove('on'); }
         }, 300);
       }, 600);
@@ -659,7 +592,6 @@
     resetGame();
   });
 
-  // ALIMENTI
   const correctZone = {
     patatine:'zone-rosso', cioccolato:'zone-rosso', brioche:'zone-rosso',
     bibita:'zone-rosso', caramella:'zone-rosso',
@@ -736,17 +668,13 @@
     const targetZoneId = evt.to.id;
     if (!correctZone[id]) return;
     if (correctZone[id] === targetZoneId) {
-      updateItemStatus(itemEl, true);
-      setTraffic('ok');
-      correctCount++;
-      checkSuccess();
+      updateItemStatus(itemEl, true); setTraffic('ok');
+      correctCount++; checkSuccess();
     } else if (targetZoneId === 'start-zone') {
       if (itemEl.classList.contains('correct')) correctCount = Math.max(0, correctCount - 1);
-      updateItemStatus(itemEl, null);
-      setTraffic(null);
+      updateItemStatus(itemEl, null); setTraffic(null);
     } else {
-      updateItemStatus(itemEl, false);
-      setTraffic('ko');
+      updateItemStatus(itemEl, false); setTraffic('ko');
       startZone.appendChild(itemEl);
     }
   }
@@ -756,50 +684,53 @@
     ['zone-rosso','zone-giallo','zone-verde'].forEach(id => {
       document.getElementById(id).querySelectorAll('.item').forEach(el => el.remove());
     });
-    buildItems();
-    setTraffic(null);
+    buildItems(); setTraffic(null);
   }
 
-  // RESET mobile
   document.getElementById('btn-reset').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
   document.getElementById('btn-reset-mobile').addEventListener('click', e => { e.stopPropagation(); resetGame(); });
 
-  // ===== TOUCH DRAG GHOST MANUALE =====
-  // Bypassa completamente il fallback di SortableJS per il ghost:
-  // creiamo un clone che segue ESATTAMENTE il dito in tempo reale.
+  // ===== TOUCH GHOST MANUALE =====
   let touchGhost = null;
-  let touchOffsetX = 0, touchOffsetY = 0;
 
   document.addEventListener('touchstart', e => {
     const item = e.target.closest('.item');
     if (!item) return;
     const touch = e.touches[0];
-    const rect = item.getBoundingClientRect();
-    touchOffsetX = touch.clientX - rect.left - rect.width / 2;
-    touchOffsetY = touch.clientY - rect.top - rect.height / 2;
 
-    // Clona l'item come ghost visivo
     touchGhost = item.cloneNode(true);
     touchGhost.classList.add('item-dragging');
-    touchGhost.style.width  = rect.width + 'px';
-    touchGhost.style.left   = (touch.clientX - rect.width / 2 - touchOffsetX) + 'px';
-    touchGhost.style.top    = (touch.clientY - rect.height / 2 - touchOffsetY) + 'px';
+
+    // Stili inline forzati — dimensione grande indipendente dal media query
+    touchGhost.style.fontSize  = '22px';
+    touchGhost.style.padding   = '12px 20px';
+    touchGhost.style.minWidth  = '130px';
+    touchGhost.style.width     = 'auto';
+    touchGhost.style.left      = (touch.clientX - 65) + 'px';
+    touchGhost.style.top       = (touch.clientY - 28) + 'px';
+
     document.body.appendChild(touchGhost);
   }, { passive: true });
 
   document.addEventListener('touchmove', e => {
     if (!touchGhost) return;
     const touch = e.touches[0];
-    const rect = touchGhost.getBoundingClientRect();
-    touchGhost.style.left = (touch.clientX - rect.width / 2) + 'px';
-    touchGhost.style.top  = (touch.clientY - rect.height / 2) + 'px';
+    // Dopo il primo render abbiamo le dimensioni reali
+    const w = touchGhost.offsetWidth;
+    const h = touchGhost.offsetHeight;
+    touchGhost.style.left = (touch.clientX - w / 2) + 'px';
+    touchGhost.style.top  = (touch.clientY - h / 2) + 'px';
   }, { passive: true });
 
   document.addEventListener('touchend', () => {
     if (touchGhost) { touchGhost.remove(); touchGhost = null; }
   });
 
-  // SORTABLE (ghost nativo disabilitato, usiamo il nostro touch ghost)
+  document.addEventListener('touchcancel', () => {
+    if (touchGhost) { touchGhost.remove(); touchGhost = null; }
+  });
+
+  // SORTABLE — ghost nativo disabilitato, usiamo il nostro
   ['start-zone','zone-rosso','zone-giallo','zone-verde'].forEach(id => {
     Sortable.create(document.getElementById(id), {
       group: 'alimenti',
@@ -807,7 +738,7 @@
       draggable: '.item',
       filter: '.zone-icon-fixed',
       forceFallback: true,
-      fallbackClass: '',        // nessun ghost di SortableJS
+      fallbackClass: '',
       fallbackOnBody: true,
       fallbackTolerance: 3,
       delay: 60,
