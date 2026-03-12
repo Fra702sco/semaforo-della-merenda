@@ -858,10 +858,10 @@
       forceFallback: true,
       fallbackClass: '',
       fallbackOnBody: true,
-      fallbackTolerance: 5,
-      delay: 80,
-      delayOnTouchOnly: true,
-      touchStartThreshold: 4,
+      fallbackTolerance: 0,   // era 5
+      delay: 0,               // era 80 — causa ritardo nel rilevamento
+      delayOnTouchOnly: false, // era true
+      touchStartThreshold: 1,  // era 4
       onAdd: handleDrop,
       onUpdate: handleDrop
     });
@@ -884,14 +884,15 @@
 
   function createGhost(item, clientX, clientY) {
     if (touchGhost) { touchGhost.remove(); touchGhost = null; }
-    ghostOffX = 40;  // metà larghezza approssimativa del ghost piccolo
-    ghostOffY = 20;  // metà altezza approssimativa
+    const rect = item.getBoundingClientRect();
+    ghostOffX = clientX - rect.left;
+    ghostOffY = clientY - rect.top;
     touchGhost = item.cloneNode(true);
     touchGhost.className = 'touch-ghost';
     touchGhost.style.left = (clientX - ghostOffX) + 'px';
     touchGhost.style.top  = (clientY - ghostOffY) + 'px';
     document.body.appendChild(touchGhost);
-  }
+  } 
 
   function moveGhost(clientX, clientY) {
     if (!touchGhost) return;
@@ -945,6 +946,7 @@
 </script>
 </body>
 </html>
+
 
 
 
