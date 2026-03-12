@@ -86,7 +86,7 @@ semaforo-merenda/
 ├── index.html                              # Applicazione completa (single file)
 ├── assets/                                 # Risorse statiche
 │ └── image/                                # Contiene tutte le immagini  
-│ │ └── background                          # Sfondo e texture
+│ │ └── background/                         # Sfondo e texture
 │ │ │ └── IL-SEMAFORO-DELLA-MERENDA.jpg     # Immagine di sfondo del semaforo
 ├── README.md                               # Questo file 
 └── LICENSE                                 # Licenza CC BY-NC 4.0
