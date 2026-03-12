@@ -18,6 +18,7 @@
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
+      touch-action: manipulation;
     }
 
     .light-glow {
@@ -64,7 +65,6 @@
       position: relative;
       overflow: hidden;
     }
-
     @keyframes cardPop {
       0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
       70%  { transform: scale(1.08) rotate(2deg); }
@@ -233,7 +233,6 @@
     .settings-btns button:hover { filter: brightness(1.1); transform: translateY(-1px); }
     .settings-note { text-align: center; font-size: 12px; color: #999; margin-top: 14px; }
 
-    /* ===== ABOUT PANEL ===== */
     #about-panel {
       display: none;
       position: fixed; top: 50%; left: 50%;
@@ -263,18 +262,18 @@
       padding: 12px; margin-bottom: 16px;
       font-size: 13px; color: #2e7d32; line-height: 1.5;
     }
-    #about-panel .about-license {
-      font-size: 12px; color: #aaa; margin-bottom: 20px;
-    }
+    #about-panel .about-license { font-size: 12px; color: #aaa; margin-bottom: 20px; }
     #btn-about-close {
       background: #1976d2; color: white; border: none;
       border-radius: 50px; padding: 10px 28px;
-      font-size: 15px; font-weight: bold; cursor: pointer;
-      transition: all 0.2s;
+      font-size: 15px; font-weight: bold; cursor: pointer; transition: all 0.2s;
     }
     #btn-about-close:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-    .top-controls { position: fixed; top: 14px; right: 14px; display: flex; gap: 8px; z-index: 999; }
+    .top-controls {
+      position: fixed; top: 14px; right: 14px;
+      display: flex; gap: 8px; z-index: 999;
+    }
     .btn-ctrl {
       border-radius: 20px; padding: 8px 16px;
       font-size: 13px; font-weight: bold; cursor: pointer;
@@ -352,6 +351,57 @@
     .item .check  { font-size: 15px; min-width: 18px; text-align: center; }
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+
+    /* ===== TABLET ===== */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .main-area { padding: 14px 20px 10px 35%; }
+      .panel-title { font-size: 20px; }
+      .item { font-size: 18px; }
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+      body {
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+        background-position: left top;
+      }
+      .top-controls {
+        position: relative;
+        top: auto; right: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px;
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(8px);
+      }
+      .btn-ctrl { font-size: 11px; padding: 6px 12px; }
+      .main-area {
+        padding: 10px 12px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+      .panel { max-width: 100%; }
+      .panel-title { font-size: 16px; padding: 10px 14px; letter-spacing: 1px; }
+      .dropzone { min-height: 60px; padding: 10px 10px 10px 48px; gap: 6px; }
+      .zone-icon-fixed { font-size: 22px; left: 10px; }
+      .item { font-size: 16px; padding: 6px 10px; gap: 5px; }
+      .item .label { font-size: 11px; }
+      .bottom-area { padding: 8px 12px 20px; }
+      #start-zone { min-height: 70px; padding: 10px 14px; gap: 8px; }
+      #global-status { font-size: 14px; padding: 6px 12px; }
+      .success-card { padding: 28px 24px; }
+      .success-title { font-size: 36px; }
+      .success-subtitle { font-size: 16px; }
+      .success-score { font-size: 20px; padding: 12px 20px; }
+      .btn-play-again { font-size: 18px; padding: 14px 32px; }
+      #settings-panel { min-width: unset; width: 92%; padding: 20px 18px; }
+      #about-panel { width: 92%; padding: 24px 20px; }
+      #calib-overlay { min-width: unset; width: 90%; }
+    }
   </style>
 </head>
 <body>
@@ -361,7 +411,6 @@
   <div id="glow-green"  class="light-glow"></div>
   <div id="calib-overlay"></div>
 
-  <!-- SCHERMATA SUCCESSO -->
   <div id="success-screen">
     <div class="success-card">
       <span class="success-stars">⭐🌟⭐🌟⭐</span>
@@ -378,7 +427,6 @@
     </div>
   </div>
 
-  <!-- PANNELLO IMPOSTAZIONI -->
   <div id="settings-panel">
     <h3>⚙️ Impostazioni Coordinate Luci</h3>
     <div class="settings-row">
@@ -404,7 +452,6 @@
     </div>
   </div>
 
-  <!-- ABOUT PANEL -->
   <div id="about-panel">
     <div class="about-emoji">🚦</div>
     <h2>Il Semaforo della Merenda</h2>
@@ -421,7 +468,6 @@
     <button id="btn-about-close">✖ Chiudi</button>
   </div>
 
-  <!-- PULSANTI -->
   <div class="top-controls">
     <button id="btn-about"    class="btn-ctrl">ℹ️ About</button>
     <button id="btn-settings" class="btn-ctrl">⚙️ Coordinate</button>
@@ -489,7 +535,6 @@
   positionGlows();
   window.addEventListener('resize', positionGlows);
 
-  // IMPOSTAZIONI
   const settingsPanel = document.getElementById('settings-panel');
   function openSettings() {
     document.getElementById('inp-red-x').value    = bulbCoords[0].x;
@@ -517,15 +562,10 @@
   });
   document.getElementById('btn-settings-close').addEventListener('click', () => settingsPanel.classList.remove('show'));
 
-  // ABOUT
   const aboutPanel = document.getElementById('about-panel');
-  document.getElementById('btn-about').addEventListener('click', e => {
-    e.stopPropagation();
-    aboutPanel.classList.add('show');
-  });
+  document.getElementById('btn-about').addEventListener('click', e => { e.stopPropagation(); aboutPanel.classList.add('show'); });
   document.getElementById('btn-about-close').addEventListener('click', () => aboutPanel.classList.remove('show'));
 
-  // CALIBRAZIONE
   const calibSteps = [
     { label: '🔴 Clicca sul CENTRO del bulbo ROSSO',  color: '#ef5350' },
     { label: '🟡 Clicca sul CENTRO del bulbo GIALLO', color: '#ffd600' },
@@ -580,7 +620,6 @@
     }
   });
 
-  // CORIANDOLI
   const CONFETTI_COLORS = ['#ff6f00','#ffd600','#43a047','#2196f3','#e91e63','#9c27b0','#00bcd4','#ff5722'];
   function launchConfetti() {
     for (let i = 0; i < 120; i++) {
@@ -589,14 +628,11 @@
         c.className = 'confetti-piece';
         const size = 8 + Math.random() * 14;
         c.style.cssText = `
-          left: ${Math.random() * 100}vw;
-          top: -20px;
-          width: ${size}px;
-          height: ${size}px;
+          left: ${Math.random() * 100}vw; top: -20px;
+          width: ${size}px; height: ${size}px;
           background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
           border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-          animation-duration: ${2 + Math.random() * 3}s;
-          animation-delay: 0s;
+          animation-duration: ${2 + Math.random() * 3}s; animation-delay: 0s;
         `;
         document.body.appendChild(c);
         setTimeout(() => c.remove(), 5500);
@@ -604,7 +640,6 @@
     }
   }
 
-  // SCHERMATA SUCCESSO
   const successScreen = document.getElementById('success-screen');
   let correctCount = 0;
   const TOTAL = 15;
@@ -632,7 +667,6 @@
     resetGame();
   });
 
-  // ALIMENTI
   const correctZone = {
     patatine:'zone-rosso', cioccolato:'zone-rosso', brioche:'zone-rosso',
     bibita:'zone-rosso', caramella:'zone-rosso',
@@ -708,7 +742,6 @@
     const id = itemEl.dataset.id;
     const targetZoneId = evt.to.id;
     if (!correctZone[id]) return;
-
     if (correctZone[id] === targetZoneId) {
       updateItemStatus(itemEl, true);
       setTraffic('ok');
@@ -756,4 +789,3 @@
 </script>
 </body>
 </html>
-
