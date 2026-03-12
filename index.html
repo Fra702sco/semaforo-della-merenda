@@ -14,7 +14,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      background-image: url('assets/image/background/background.jpg');
+      background-image: url('background-mobile.jpg');
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
@@ -378,11 +378,11 @@
       white-space: nowrap;
       will-change: left, top;
     }
-
     .sortable-chosen { opacity: 0.5; }
     .sortable-ghost {
-      opacity: 0 !important;
-      display: none !important;
+      opacity: 0.25;
+      background: #e3f2fd !important;
+      border: 2px dashed #2196f3 !important;
     }
 
     /* ===== TABLET ===== */
@@ -398,7 +398,7 @@
         overflow-y: auto;
         height: auto;
         min-height: 100vh;
-        background-image: url('assets/image/background/background-mobile.jpg');
+        background-image: url('background-mobile.jpg');
         background-position: center top;
       }
       .top-controls { display: none !important; }
@@ -818,7 +818,7 @@
       animation: 220,
       draggable: '.item',
       filter: '.zone-icon-fixed',
-      forceFallback: true,
+      forceFallback: false,
       fallbackClass: '',       // nessun ghost SortableJS
       fallbackOnBody: true,
       fallbackTolerance: 5,
@@ -887,13 +887,19 @@
     createGhost(item, e.clientX, e.clientY);
   });
 
-  document.addEventListener('mousemove', e => moveGhost(e.clientX, e.clientY));
-  document.addEventListener('mouseup',   removeGhost);
+  document.addEventListener('mousemove', e => {
+  if (!touchGhost) return;
+  if (e.buttons === 0) { removeGhost(); return; } // tasto già rilasciato
+  moveGhost(e.clientX, e.clientY);
+  });
+  window.addEventListener('mouseup',    removeGhost);
+  window.addEventListener('mouseleave', removeGhost);
 
   buildItems();
 </script>
 </body>
 </html>
+
 
 
 
