@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Semaforo della Merenda</title>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-image: url('IL-SEMAFORO-DELLA-MERENDA.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    /* ===== GLOW ===== */
+    .light-glow {
+      position: fixed;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, box-shadow 0.35s ease;
+      mix-blend-mode: screen;
+      z-index: 10;
+    }
+    #glow-red.on {
+      opacity: 1;
+      background: radial-gradient(circle, rgba(255,100,100,0.95) 30%, rgba(255,0,0,0.05) 100%);
+      box-shadow: 0 0 55px 28px rgba(255,50,50,0.8);
+    }
+    #glow-green.on {
+      opacity: 1;
+      background: radial-gradient(circle, rgba(100,255,100,0.95) 30%, rgba(0,220,0,0.05) 100%);
+      box-shadow: 0 0 55px 28px rgba(50,255,50,0.8);
+    }
+
+    /* ===== SCHERMATA SUCCESSO ===== */
+    #success-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 50000;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+    }
+    #success-screen.show { display: flex; }
+
+    .success-card {
+      background: linear-gradient(145deg, #fffde7, #fff9c4, #fffde7);
+      border-radius: 32px;
+      padding: 48px 56px;
+      text-align: center;
+      max-width: 620px;
+      width: 90%;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 0 6px #ffd600, 0 0 0 12px #ff6f00;
+      animation: cardPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes cardPop {
+      0%   { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+      70%  { transform: scale(1.08) rotate(2deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .success-stars {
+      font-size: 48px;
+      letter-spacing: 6px;
+      animation: starsBounce 1s ease infinite alternate;
+      display: block;
+      margin-bottom: 10px;
+    }
+    @keyframes starsBounce {
+      from { transform: scale(1) rotate(-3deg); }
+      to   { transform: scale(1.12) rotate(3deg); }
+    }
+
+    .success-title {
+      font-size: 52px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ff6f00, #ff9800, #ffd600);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin: 10px 0 6px;
+      text-shadow: none;
+      animation: titlePulse 1.5s ease infinite alternate;
+    }
+    @keyframes titlePulse {
+      from { filter: brightness(1); }
+      to   { filter: brightness(1.2); }
+    }
+
+    .success-subtitle {
+      font-size: 22px;
+      color: #5d4037;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .success-score {
+      background: linear-gradient(135deg, #43a047, #2e7d32);
+      color: white;
+      border-radius: 20px;
+      padding: 16px 32px;
+      font-size: 26px;
+      font-weight: 900;
+      margin: 18px auto;
+      display: inline-block;
+      box-shadow: 0 6px 20px rgba(67,160,71,0.5);
+      animation: scoreBounce 0.8s 0.6s cubic-bezier(0.175,0.885,0.32,1.275) both;
+    }
+    @keyframes scoreBounce {
+      0%   { transform: scale(0); opacity: 0; }
+      80%  { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-emojis {
+      font-size: 36px;
+      margin: 14px 0;
+      animation: emojiSpin 3s linear infinite;
+      display: block;
+    }
+    @keyframes emojiSpin {
+      0%   { letter-spacing: 4px; }
+      50%  { letter-spacing: 14px; }
+      100% { letter-spacing: 4px; }
+    }
+
+    .success-message {
+      font-size: 19px;
+      color: #4e342e;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .btn-play-again {
+      background: linear-gradient(135deg, #ff6f00, #ff9800);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 18px 48px;
+      font-size: 22px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,111,0,0.5);
+      transition: all 0.2s;
+      letter-spacing: 1px;
+      animation: btnAppear 0.5s 1s both;
+    }
+    @keyframes btnAppear {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .btn-play-again:hover {
+      transform: scale(1.07) translateY(-3px);
+      box-shadow: 0 14px 35px rgba(255,111,0,0.6);
+    }
+    .btn-play-again:active { transform: scale(0.97); }
+
+    /* ===== CORIANDOLI ===== */
+    .confetti-piece {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 49999;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0.3; }
+    }
+
+    /* ===== CALIBRAZIONE ===== */
+    body.calibrating { cursor: crosshair !important; }
+    body.calibrating .panel,
+    body.calibrating .bottom-area,
+    body.calibrating .top-controls { pointer-events: none; }
+
+    #calib-overlay {
+      display: none;
+      position: fixed;
+      bottom: 30px; left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.88); color: white;
+      padding: 16px 28px; border-radius: 14px;
+      font-size: 16px; text-align: center;
+      z-index: 9999; pointer-events: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5); min-width: 360px;
+    }
+    #calib-overlay.show { display: block; }
+    #calib-overlay .step { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+    #calib-overlay .hint { font-size: 13px; color: #aaa; margin-top: 6px; }
+
+    /* ===== PANNELLO IMPOSTAZIONI ===== */
+    #settings-panel {
+      display: none;
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,0.98);
+      border-radius: 16px; padding: 28px 32px;
+      z-index: 10000; box-shadow: 0 16px 50px rgba(0,0,0,0.5);
+      min-width: 420px; border: 3px solid #ddd;
+    }
+    #settings-panel.show { display: block; }
+    #settings-panel h3 { text-align: center; font-size: 20px; color: #333; margin-bottom: 20px; }
+    .settings-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .settings-row label { font-weight: bold; font-size: 15px; width: 90px; flex-shrink: 0; }
+    .settings-row input {
+      width: 90px; padding: 6px 10px;
+      border: 2px solid #ccc; border-radius: 8px;
+      font-size: 15px; text-align: center;
+    }
+    .settings-row input:focus { outline: none; border-color: #2196f3; }
+    .settings-row span { font-size: 13px; color: #888; }
+    .settings-btns { display: flex; gap: 10px; margin-top: 20px; justify-content: center; }
+    .settings-btns button {
+      padding: 10px 22px; border-radius: 10px; border: none;
+      font-weight: bold; font-size: 14px; cursor: pointer; transition: all 0.2s;
+    }
+    #btn-settings-save  { background: #4caf50; color: white; }
+    #btn-settings-reset { background: #ff9800; color: white; }
+    #btn-settings-close { background: #e0e0e0; color: #333; }
+    .settings-btns button:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .settings-note { text-align: center; font-size: 12px; color: #999; margin-top: 14px; }
+
+    /* ===== PULSANTI ===== */
+    .top-controls { position: fixed; top: 14px; right: 14px; display: flex; gap: 8px; z-index: 999; }
+    .btn-ctrl {
+      border-radius: 20px; padding: 8px 16px;
+      font-size: 13px; font-weight: bold; cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      transition: all 0.2s; border: 2px solid transparent; color: white;
+    }
+    .btn-ctrl:hover { transform: translateY(-1px); filter: brightness(1.1); }
+    #btn-reset    { background: #4caf50; border-color: #45a049; }
+    #btn-calib    { background: #ff9800; border-color: #e68900; }
+    #btn-settings { background: #9c27b0; border-color: #7b1fa2; }
+
+    /* ===== LAYOUT ===== */
+    .main-area {
+      flex: 1; display: flex; align-items: center;
+      justify-content: flex-end; padding: 14px 40px 10px 42%;
+    }
+    .panel { width: 100%; max-width: 850px; display: flex; flex-direction: column; gap: 10px; }
+    .panel-title {
+      background: linear-gradient(135deg, #29b8d8, #1e8bc3);
+      border-radius: 14px; padding: 14px 24px;
+      font-size: 26px; font-weight: 900; color: white;
+      text-transform: uppercase; letter-spacing: 2px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      border: 3px solid #1a9ab8; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .zones-wrapper {
+      background: rgba(255,255,255,0.35); backdrop-filter: blur(8px);
+      border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.5);
+    }
+    .zone-wrapper { position: relative; }
+    .dropzone {
+      border-radius: 12px; padding: 12px 16px 12px 56px;
+      min-height: 78px; display: flex; flex-wrap: wrap;
+      gap: 8px; align-items: center; transition: filter 0.2s;
+    }
+    .dropzone.drag-over { filter: brightness(1.15); }
+    #zone-rosso  { background: linear-gradient(135deg, #c62828, #a31515); border: 3px solid #8b0000; }
+    #zone-giallo { background: linear-gradient(135deg, #f9a825, #c77800); border: 3px solid #b56500; }
+    #zone-verde  { background: linear-gradient(135deg, #2e7d32, #1a5c1e); border: 3px solid #0d4410; }
+    .zone-icon-fixed {
+      position: absolute; left: 14px; top: 50%;
+      transform: translateY(-50%); font-size: 28px;
+      width: 38px; text-align: center;
+      pointer-events: none; user-select: none; z-index: 5;
+    }
+    #global-status {
+      text-align: center; font-size: 17px; font-weight: bold; color: #222;
+      padding: 8px 16px; background: rgba(255,255,255,0.92);
+      border-radius: 12px; box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px); min-height: 28px;
+    }
+    .bottom-area { padding: 10px 40px 16px; }
+    #start-zone {
+      background: rgba(255,255,255,0.93); backdrop-filter: blur(15px);
+      border: 3px dashed rgba(180,180,180,0.7); border-radius: 16px;
+      padding: 14px 20px; min-height: 80px;
+      display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    .item {
+      background: white; border-radius: 22px; padding: 7px 14px;
+      display: flex; align-items: center; gap: 7px;
+      font-size: 20px; cursor: grab;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      transition: all 0.2s; user-select: none;
+      border: 2px solid rgba(220,220,220,0.8);
+    }
+    .item:active { cursor: grabbing; }
+    .item:hover:not(.correct):not(.wrong) { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+    .item.correct { outline: 3px solid #4caf50; background: rgba(230,255,230,0.98); animation: pulse 0.5s ease; }
+    .item.wrong   { outline: 3px solid #e53935; background: rgba(255,230,230,0.98); animation: shake 0.4s ease; }
+    .item .label  { font-size: 13px; font-weight: bold; color: #333; }
+    .item .check  { font-size: 15px; min-width: 18px; text-align: center; }
+    @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
+  </style>
+</head>
+<body>
+
+  <div id="glow-red"    class="light-glow"></div>
+  <div id="glow-yellow" class="light-glow"></div>
+  <div id="glow-green"  class="light-glow"></div>
+  <div id="calib-overlay"></div>
+
+  <!-- ===== SCHERMATA SUCCESSO ===== -->
+  <div id="success-screen">
+    <div class="success-card">
+      <span class="success-stars">⭐🌟⭐🌟⭐</span>
+      <div class="success-title">BRAVISSIMO!</div>
+      <div class="success-subtitle">Hai completato il Semaforo della Merenda! 🎉</div>
+      <div class="success-score" id="success-score">15 / 15 ✅</div>
+      <span class="success-emojis">🍎🥦🥛🍌🥕🥖</span>
+      <div class="success-message">
+        Hai messo tutti gli alimenti<br>
+        nel <strong>posto giusto</strong>!<br>
+        Ora sai cosa mangiare per stare in salute! 💪
+      </div>
+      <button class="btn-play-again" id="btn-play-again">🔄 Gioca ancora!</button>
+    </div>
+  </div>
+
+  <!-- PANNELLO IMPOSTAZIONI -->
+  <div id="settings-panel">
+    <h3>⚙️ Impostazioni Coordinate Luci</h3>
+    <div class="settings-row">
+      <label>🔴 Rosso</label>
+      <input type="number" id="inp-red-x"> <span>X</span>
+      <input type="number" id="inp-red-y"> <span>Y</span>
+    </div>
+    <div class="settings-row">
+      <label>🟡 Giallo</label>
+      <input type="number" id="inp-yellow-x"> <span>X</span>
+      <input type="number" id="inp-yellow-y"> <span>Y</span>
+    </div>
+    <div class="settings-row">
+      <label>🟢 Verde</label>
+      <input type="number" id="inp-green-x"> <span>X</span>
+      <input type="number" id="inp-green-y"> <span>Y</span>
+    </div>
+    <div class="settings-note">Coordinate in px sull'immagine originale (1456 × 816).</div>
+    <div class="settings-btns">
+      <button id="btn-settings-save">💾 Salva</button>
+      <button id="btn-settings-reset">🔄 Default</button>
+      <button id="btn-settings-close">✖ Chiudi</button>
+    </div>
+  </div>
+
+  <div class="top-controls">
+    <button id="btn-settings" class="btn-ctrl">⚙️ Coordinate</button>
+    <button id="btn-calib"    class="btn-ctrl">🎯 Calibra Luci</button>
+    <button id="btn-reset"    class="btn-ctrl">🔄 Reset</button>
+  </div>
+
+  <div class="main-area">
+    <div class="panel">
+      <div class="panel-title">🍽️ IL SEMAFORO DELLA MERENDA</div>
+      <div class="zones-wrapper">
+        <div class="zone-wrapper">
+          <span class="zone-icon-fixed" aria-hidden="true">❌</span>
+          <div id="zone-rosso" class="dropzone"></div>
+        </div>
+        <div class="zone-wrapper">
+          <span class="zone-icon-fixed" aria-hidden="true">⚠️</span>
+          <div id="zone-giallo" class="dropzone"></div>
+        </div>
+        <div class="zone-wrapper">
+          <span class="zone-icon-fixed" aria-hidden="true">✅</span>
+          <div id="zone-verde" class="dropzone"></div>
+        </div>
+      </div>
+      <div id="global-status">Trascina gli alimenti nel rettangolo corretto! 🎮</div>
+    </div>
+  </div>
+
+  <div class="bottom-area">
+    <div id="start-zone"></div>
+  </div>
+
+<script>
+  const IMG_W = 1456, IMG_H = 816, BULB_D = 110;
+
+  const DEFAULT_COORDS = [
+    { id: 'glow-red',    x: 230, y: 206 },
+    { id: 'glow-yellow', x: 231, y: 319 },
+    { id: 'glow-green',  x: 231, y: 427 },
+  ];
+
+  let bulbCoords = (() => {
+    try {
+      const s = localStorage.getItem('semaforo_bulbCoords');
+      return s ? JSON.parse(s) : JSON.parse(JSON.stringify(DEFAULT_COORDS));
+    } catch(e) { return JSON.parse(JSON.stringify(DEFAULT_COORDS)); }
+  })();
+
+  function saveCoords() { localStorage.setItem('semaforo_bulbCoords', JSON.stringify(bulbCoords)); }
+
+  function positionGlows() {
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const scale = Math.max(vw / IMG_W, vh / IMG_H);
+    const offsetX = (vw - IMG_W * scale) / 2;
+    const d = BULB_D * scale;
+    bulbCoords.forEach(b => {
+      const el = document.getElementById(b.id);
+      if (!el) return;
+      el.style.left   = (offsetX + b.x * scale - d/2) + 'px';
+      el.style.top    = (b.y * scale - d/2) + 'px';
+      el.style.width  = d + 'px';
+      el.style.height = d + 'px';
+    });
+  }
+  positionGlows();
+  window.addEventListener('resize', positionGlows);
+
+  // ===== IMPOSTAZIONI =====
+  const settingsPanel = document.getElementById('settings-panel');
+  function openSettings() {
+    document.getElementById('inp-red-x').value    = bulbCoords[0].x;
+    document.getElementById('inp-red-y').value    = bulbCoords[0].y;
+    document.getElementById('inp-yellow-x').value = bulbCoords[1].x;
+    document.getElementById('inp-yellow-y').value = bulbCoords[1].y;
+    document.getElementById('inp-green-x').value  = bulbCoords[2].x;
+    document.getElementById('inp-green-y').value  = bulbCoords[2].y;
+    settingsPanel.classList.add('show');
+  }
+  document.getElementById('btn-settings').addEventListener('click', e => { e.stopPropagation(); openSettings(); });
+  document.getElementById('btn-settings-save').addEventListener('click', () => {
+    bulbCoords[0].x = parseInt(document.getElementById('inp-red-x').value)    || bulbCoords[0].x;
+    bulbCoords[0].y = parseInt(document.getElementById('inp-red-y').value)    || bulbCoords[0].y;
+    bulbCoords[1].x = parseInt(document.getElementById('inp-yellow-x').value) || bulbCoords[1].x;
+    bulbCoords[1].y = parseInt(document.getElementById('inp-yellow-y').value) || bulbCoords[1].y;
+    bulbCoords[2].x = parseInt(document.getElementById('inp-green-x').value)  || bulbCoords[2].x;
+    bulbCoords[2].y = parseInt(document.getElementById('inp-green-y').value)  || bulbCoords[2].y;
+    saveCoords(); positionGlows(); settingsPanel.classList.remove('show');
+  });
+  document.getElementById('btn-settings-reset').addEventListener('click', () => {
+    bulbCoords = JSON.parse(JSON.stringify(DEFAULT_COORDS));
+    localStorage.removeItem('semaforo_bulbCoords');
+    positionGlows(); openSettings();
+  });
+  document.getElementById('btn-settings-close').addEventListener('click', () => settingsPanel.classList.remove('show'));
+
+  // ===== CALIBRAZIONE =====
+  const calibSteps = [
+    { label: '🔴 Clicca sul CENTRO del bulbo ROSSO',  color: '#ef5350' },
+    { label: '🟡 Clicca sul CENTRO del bulbo GIALLO', color: '#ffd600' },
+    { label: '🟢 Clicca sul CENTRO del bulbo VERDE',  color: '#66bb6a' },
+  ];
+  let calibStep = 0, isCalibrating = false;
+  const calibOverlay = document.getElementById('calib-overlay');
+
+  function showCalibStep() {
+    if (calibStep >= 3) {
+      saveCoords();
+      calibOverlay.innerHTML = `<div class="step">✅ Calibrazione salvata!</div>`;
+      calibOverlay.classList.add('show');
+      document.body.classList.remove('calibrating');
+      isCalibrating = false; positionGlows();
+      setTimeout(() => calibOverlay.classList.remove('show'), 3000);
+      return;
+    }
+    const s = calibSteps[calibStep];
+    calibOverlay.innerHTML = `
+      <div class="step" style="color:${s.color}">${s.label}</div>
+      <div>Clicca esattamente al centro della luce</div>
+      <div class="hint">Step ${calibStep+1} / 3 &nbsp;|&nbsp; ESC per annullare</div>`;
+    calibOverlay.classList.add('show');
+  }
+
+  document.getElementById('btn-calib').addEventListener('click', e => {
+    e.stopPropagation(); isCalibrating = true; calibStep = 0;
+    document.body.classList.add('calibrating'); showCalibStep();
+  });
+  document.body.addEventListener('click', e => {
+    if (!isCalibrating) return;
+    const vw = window.innerWidth;
+    const scale = Math.max(vw / IMG_W, window.innerHeight / IMG_H);
+    const offsetX = (vw - IMG_W * scale) / 2;
+    bulbCoords[calibStep].x = Math.round((e.clientX - offsetX) / scale);
+    bulbCoords[calibStep].y = Math.round(e.clientY / scale);
+    const f = document.createElement('div');
+    f.style.cssText = `position:fixed;left:${e.clientX-18}px;top:${e.clientY-18}px;
+      width:36px;height:36px;border-radius:50%;border:3px solid white;
+      background:rgba(255,255,255,0.5);pointer-events:none;z-index:9998;transition:all 0.5s;`;
+    document.body.appendChild(f);
+    setTimeout(() => { f.style.transform='scale(2.5)'; f.style.opacity='0'; }, 10);
+    setTimeout(() => f.remove(), 520);
+    calibStep++; showCalibStep();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && isCalibrating) {
+      isCalibrating = false;
+      document.body.classList.remove('calibrating');
+      calibOverlay.classList.remove('show');
+    }
+  });
+
+  // ===== CORIANDOLI =====
+  const CONFETTI_COLORS = ['#ff6f00','#ffd600','#43a047','#2196f3','#e91e63','#9c27b0','#00bcd4','#ff5722'];
+  function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+      setTimeout(() => {
+        const c = document.createElement('div');
+        c.className = 'confetti-piece';
+        const size = 8 + Math.random() * 14;
+        c.style.cssText = `
+          left: ${Math.random() * 100}vw;
+          top: -20px;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)]};
+          border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+          animation-duration: ${2 + Math.random() * 3}s;
+          animation-delay: 0s;
+        `;
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 5500);
+      }, i * 40);
+    }
+  }
+
+  // ===== SCHERMATA SUCCESSO =====
+  const successScreen = document.getElementById('success-screen');
+  let correctCount = 0;
+  const TOTAL = 15;
+
+  function checkSuccess() {
+    if (correctCount >= TOTAL) {
+      setTimeout(() => {
+        document.getElementById('success-score').textContent = `${TOTAL} / ${TOTAL} ✅`;
+        successScreen.classList.add('show');
+        launchConfetti();
+        // Fai lampeggiare il verde del semaforo in celebrazione
+        let blinks = 0;
+        const blink = setInterval(() => {
+          const g = document.getElementById('glow-green');
+          g.classList.toggle('on');
+          blinks++;
+          if (blinks >= 8) { clearInterval(blink); g.classList.remove('on'); }
+        }, 300);
+      }, 600);
+    }
+  }
+
+  document.getElementById('btn-play-again').addEventListener('click', () => {
+    successScreen.classList.remove('show');
+    // Rimuove tutti i coriandoli rimasti
+    document.querySelectorAll('.confetti-piece').forEach(c => c.remove());
+    resetGame();
+  });
+
+  // ===== ALIMENTI =====
+  const correctZone = {
+    patatine:'zone-rosso', cioccolato:'zone-rosso', brioche:'zone-rosso',
+    bibita:'zone-rosso', caramella:'zone-rosso',
+    torta:'zone-giallo', succo:'zone-giallo', focaccia:'zone-giallo',
+    panino:'zone-giallo', biscotto:'zone-giallo',
+    mela:'zone-verde', yogurt:'zone-verde', banana:'zone-verde',
+    carota:'zone-verde', pane:'zone-verde'
+  };
+  const itemsData = [
+    {id:'patatine',  emoji:'🍟', label:'Patatine'},
+    {id:'cioccolato',emoji:'🍫', label:'Cioccolato'},
+    {id:'brioche',   emoji:'🥐', label:'Brioche'},
+    {id:'bibita',    emoji:'🥤', label:'Bibita'},
+    {id:'caramella', emoji:'🍬', label:'Caramella'},
+    {id:'torta',     emoji:'🍰', label:'Torta'},
+    {id:'succo',     emoji:'🧃', label:'Succo'},
+    {id:'focaccia',  emoji:'🫓', label:'Focaccia'},
+    {id:'panino',    emoji:'🥪', label:'Panino'},
+    {id:'biscotto',  emoji:'🍪', label:'Biscotto'},
+    {id:'mela',      emoji:'🍎', label:'Mela'},
+    {id:'yogurt',    emoji:'🥣', label:'Yogurt'},
+    {id:'banana',    emoji:'🍌', label:'Banana'},
+    {id:'carota',    emoji:'🥕', label:'Carota'},
+    {id:'pane',      emoji:'🥖', label:'Pane'}
+  ];
+
+  const startZone = document.getElementById('start-zone');
+
+  function createItem(item) {
+    const div = document.createElement('div');
+    div.className = 'item';
+    div.dataset.id = item.id;
+    div.innerHTML = `<span>${item.emoji}</span><span class="label">${item.label}</span><span class="check"></span>`;
+    return div;
+  }
+
+  function buildItems() {
+    startZone.innerHTML = '';
+    itemsData.forEach(item => startZone.appendChild(createItem(item)));
+  }
+
+  let trafficTimer = null;
+  function setTraffic(status) {
+    const red = document.getElementById('glow-red');
+    const green = document.getElementById('glow-green');
+    const text = document.getElementById('global-status');
+    red.classList.remove('on'); green.classList.remove('on');
+    clearTimeout(trafficTimer);
+    if (status === 'ok') {
+      green.classList.add('on');
+      text.innerHTML = '✅ <strong style="color:#1b5e20">Perfetto! Alimento nel posto giusto!</strong> 🎉';
+      trafficTimer = setTimeout(() => { green.classList.remove('on'); text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮'; }, 2500);
+    } else if (status === 'ko') {
+      red.classList.add('on');
+      text.innerHTML = '❌ <strong style="color:#b71c1c">Ops! Posto sbagliato, riprova!</strong>';
+      trafficTimer = setTimeout(() => { red.classList.remove('on'); text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮'; }, 2500);
+    } else {
+      text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮';
+    }
+  }
+
+  function updateItemStatus(el, correct) {
+    el.classList.remove('correct', 'wrong');
+    const check = el.querySelector('.check');
+    if (correct === true)       { el.classList.add('correct'); check.textContent = '✅'; }
+    else if (correct === false) { el.classList.add('wrong');   check.textContent = '❌'; }
+    else                        { check.textContent = ''; }
+  }
+
+  function handleDrop(evt) {
+    const itemEl = evt.item;
+    const id = itemEl.dataset.id;
+    const targetZoneId = evt.to.id;
+    if (!correctZone[id]) return;
+
+    if (correctZone[id] === targetZoneId) {
+      updateItemStatus(itemEl, true);
+      setTraffic('ok');
+      correctCount++;
+      checkSuccess();
+    } else if (targetZoneId === 'start-zone') {
+      // Se era già corretto e viene rimosso dalla zona, scala il contatore
+      if (itemEl.classList.contains('correct')) correctCount = Math.max(0, correctCount - 1);
+      updateItemStatus(itemEl, null);
+      setTraffic(null);
+    } else {
+      updateItemStatus(itemEl, false);
+      setTraffic('ko');
+      startZone.appendChild(itemEl);
+    }
+  }
+
+  function resetGame() {
+    correctCount = 0;
+    ['zone-rosso','zone-giallo','zone-verde'].forEach(id => {
+      document.getElementById(id).querySelectorAll('.item').forEach(el => el.remove());
+    });
+    buildItems();
+    setTraffic(null);
+  }
+
+  ['start-zone','zone-rosso','zone-giallo','zone-verde'].forEach(id => {
+    Sortable.create(document.getElementById(id), {
+      group: 'alimenti', animation: 220,
+      draggable: '.item', filter: '.zone-icon-fixed',
+      onAdd: handleDrop, onUpdate: handleDrop
+    });
+  });
+
+  document.querySelectorAll('.dropzone').forEach(zone => {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', () => zone.classList.remove('drag-over'));
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', e => {
+    e.stopPropagation(); resetGame();
+  });
+
+  buildItems();
+</script>
+</body>
+</html>
