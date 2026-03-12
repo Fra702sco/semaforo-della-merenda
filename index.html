@@ -884,9 +884,8 @@
 
   function createGhost(item, clientX, clientY) {
     if (touchGhost) { touchGhost.remove(); touchGhost = null; }
-    const rect = item.getBoundingClientRect();
-    ghostOffX = clientX - rect.left;
-    ghostOffY = clientY - rect.top;
+    ghostOffX = 40;  // metà larghezza approssimativa del ghost piccolo
+    ghostOffY = 20;  // metà altezza approssimativa
     touchGhost = item.cloneNode(true);
     touchGhost.className = 'touch-ghost';
     touchGhost.style.left = (clientX - ghostOffX) + 'px';
@@ -946,5 +945,6 @@
 </script>
 </body>
 </html>
+
 
 
