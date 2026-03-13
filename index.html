@@ -406,6 +406,9 @@
   </style>
 </head>
 <body>
+  <!-- Audio semaforo -->
+  <audio id="audio-verde" src="assets/audio/correct.mp3" preload="auto"></audio>
+  <audio id="audio-rosso" src="assets/audio/error.mp3" preload="auto"></audio>
 
   <div id="glow-red"    class="light-glow"></div>
   <div id="glow-yellow" class="light-glow"></div>
@@ -512,6 +515,14 @@
   </div>
 
 <script>
+  
+    function playSound(id) {
+    const audio = document.getElementById(id);
+    if (!audio) return;
+    audio.currentTime = 0;
+    audio.play().catch(() => {}); // ignora errori silenziosamente
+  }
+
   const IMG_W = 1456, IMG_H = 816, BULB_D = 110;
 
   const DEFAULT_COORDS = [
@@ -779,25 +790,37 @@
 
   let trafficTimer = null;
   function setTraffic(status) {
-    const red   = document.getElementById('glow-red');
-    const green = document.getElementById('glow-green');
-    const text  = document.getElementById('global-status');
-    red.classList.remove('on'); green.classList.remove('on');
-    clearTimeout(trafficTimer);
-    if (status === 'ok') {
-      green.classList.add('on');
-      text.innerHTML = '✅ <strong style="color:#1b5e20">Perfetto! Alimento nel posto giusto!</strong> 🎉';
-      trafficTimer = setTimeout(() => { green.classList.remove('on'); text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮'; }, 2500);
-      if (window.innerWidth <= 768) showToast('ok');
-    } else if (status === 'ko') {
-      red.classList.add('on');
-      text.innerHTML = '❌ <strong style="color:#b71c1c">Ops! Posto sbagliato, riprova!</strong>';
-      trafficTimer = setTimeout(() => { red.classList.remove('on'); text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮'; }, 2500);
-      if (window.innerWidth <= 768) showToast('ko');
-    } else {
+  const red   = document.getElementById('glow-red');
+  const green = document.getElementById('glow-green');
+  const text  = document.getElementById('global-status');
+  red.classList.remove('on'); green.classList.remove('on');
+  clearTimeout(trafficTimer);
+
+  if (status === 'ok') {
+    green.classList.add('on');
+    playSound('audio-verde'); // 👈 AGGIUNGI QUESTA
+    text.innerHTML = '✅ <strong style="color:#1b5e20">Perfetto! Alimento nel posto giusto!</strong> 🎉';
+    trafficTimer = setTimeout(() => {
+      green.classList.remove('on');
       text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮';
-    }
+    }, 2500);
+    if (window.innerWidth <= 768) showToast('ok');
+
+  } else if (status === 'ko') {
+    red.classList.add('on');
+    playSound('audio-rosso'); // 👈 AGGIUNGI QUESTA
+    text.innerHTML = '❌ <strong style="color:#b71c1c">Ops! Posto sbagliato, riprova!</strong>';
+    trafficTimer = setTimeout(() => {
+      red.classList.remove('on');
+      text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮';
+    }, 2500);
+    if (window.innerWidth <= 768) showToast('ko');
+
+  } else {
+    text.textContent = 'Trascina gli alimenti nel rettangolo corretto! 🎮';
   }
+}
+
 
   function updateItemStatus(el, correct) {
     el.classList.remove('correct', 'wrong');
@@ -934,6 +957,7 @@
 </script>
 </body>
 </html>
+
 
 
 
