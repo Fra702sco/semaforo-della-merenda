@@ -1,6 +1,3 @@
-Ecco il README completo, copia e incolla tutto in un file `README.md`:
-
-
 # 🚦 Il Semaforo della Merenda
 
 > Gioco educativo interattivo per bambini sulla corretta alimentazione
@@ -35,11 +32,13 @@ imparando in modo divertente cosa è bene mangiare durante la merenda.
 
 ## ✨ Funzionalità
 
-- 🖱️ **Drag & Drop** fluido con SortableJS (compatibile touch screen e tablet)
+- 🖱️ **Drag & Drop** fluido con SortableJS (compatibile mouse, touch screen e tablet)
+- 👻 **Ghost manuale personalizzato** — elemento rimpicciolito che segue il cursore/dito senza inclinazione
 - 🚦 **Semaforo animato** — si illumina di verde se corretto, rosso se sbagliato
+- 📳 **Toast banner mobile** — notifica visiva animata (verde/rosso) che appare da sinistra su smartphone
 - 🎊 **Schermata di successo** con coriandoli animati al completamento di tutti gli alimenti
-- 🎯 **Calibrazione luci** — clicca direttamente sui bulbi del semaforo per allineare le luci
-- ⚙️ **Pannello coordinate** — impostazione manuale precisa della posizione luci
+- 🎯 **Calibrazione luci** — accessibile solo tramite scorciatoia da tastiera (nascosta agli utenti)
+- ⚙️ **Pannello coordinate** — accessibile solo tramite scorciatoia da tastiera (nascosta agli utenti)
 - 💾 **Salvataggio automatico** delle impostazioni di calibrazione nel localStorage
 - 🔄 **Reset** per ricominciare da zero
 
@@ -53,9 +52,9 @@ imparando in modo divertente cosa è bene mangiare durante la merenda.
 
 ### Metodo 2 — Clona con Git
 ```bash
-git clone https://github.com/Fra702/semaforo-della-merenda.git
+git clone https://github.com/Fra702sco/semaforo-della-merenda.git
 cd semaforo-della-merenda
-Apri index.html nel browser
+# Apri index.html nel browser
 ```
 
 ### Metodo 3 — GitHub Pages
@@ -66,16 +65,38 @@ Il gioco è disponibile online all'indirizzo:
 
 ## 🎯 Come calibrare le luci del semaforo
 
-Se le luci non sono perfettamente allineate con l'immagine dello sfondo:
+I pannelli di calibrazione e coordinate sono **nascosti** all'utente finale e accessibili
+solo tramite scorciatoie da tastiera — così i bambini non possono modificare accidentalmente
+le impostazioni.
 
-1. Clicca il pulsante **🎯 Calibra Luci** in alto a destra
+### ⌨️ Scorciatoie da tastiera
+
+| Azione | Windows / Linux | macOS |
+|---|---|---|
+| Apri/chiudi **Coordinate** | `Ctrl + Shift + L` | `Cmd + Shift + L` |
+| Avvia/annulla **Calibratore** | `Ctrl + Shift + K` | `Cmd + Shift + K` |
+| Annulla calibrazione | `ESC` | `ESC` |
+
+### Procedura di calibrazione
+1. Premi `Ctrl+Shift+K` (o `Cmd+Shift+K` su macOS)
 2. Il cursore diventa una croce — clicca sul **centro del bulbo rosso**
 3. Clicca sul **centro del bulbo giallo**
 4. Clicca sul **centro del bulbo verde**
 5. Le coordinate vengono **salvate automaticamente** nel browser
 
-Per impostare le coordinate manualmente, usa il pulsante **⚙️ Coordinate**.  
+Per impostare le coordinate manualmente, usa `Ctrl+Shift+L`.  
 Per ripristinare i valori di default, clicca **🔄 Default** nel pannello.
+
+---
+
+## 📱 Compatibilità
+
+| Piattaforma | Supporto |
+|---|---|
+| Desktop (Chrome, Firefox, Edge) | ✅ Completo |
+| Desktop Safari / macOS | ✅ Completo (ghost drag senza inclinazione) |
+| Tablet (touch) | ✅ Completo |
+| Mobile (iOS / Android) | ✅ Completo con toast banner |
 
 ---
 
@@ -83,14 +104,14 @@ Per ripristinare i valori di default, clicca **🔄 Default** nel pannello.
 
 ```
 semaforo-merenda/
-├── index.html                              # Applicazione completa (single file)
-├── assets/                                 # Risorse statiche
-│ └── image/                                # Contiene tutte le immagini  
-│ │ └── background/                         # Sfondo e texture
-│ │ │ └── background.jpg                    # Immagine desktop di sfondo del semaforo
-│ │ │ └── background-mobile.jpg             # Immagine mobile di sfondo del semaforo
-├── README.md                               # Questo file 
-└── LICENSE                                 # Licenza CC BY-NC 4.0
+├── index.html                          # Applicazione completa (single file)
+├── assets/                             # Risorse statiche
+│   └── image/
+│       └── background/
+│           ├── background.jpg          # Sfondo desktop
+│           └── background-mobile.jpg  # Sfondo mobile
+├── README.md                           # Questo file
+└── LICENSE                             # Licenza CC BY-NC 4.0
 ```
 
 ---
@@ -100,8 +121,8 @@ semaforo-merenda/
 | Tecnologia | Utilizzo |
 |---|---|
 | **HTML5** | Struttura dell'applicazione |
-| **CSS3** | Animazioni, layout, effetti glow |
-| **JavaScript (ES6+)** | Logica del gioco, calibrazione, localStorage |
+| **CSS3** | Animazioni, layout, effetti glow, clip-path toast |
+| **JavaScript (ES6+)** | Logica del gioco, ghost manuale, calibrazione, localStorage |
 | **[SortableJS 1.15](https://sortablejs.github.io/Sortable/)** | Drag & drop degli alimenti |
 | **localStorage** | Salvataggio impostazioni di calibrazione |
 
@@ -119,13 +140,14 @@ L'obiettivo è sensibilizzare i bambini a scegliere in modo consapevole
 cosa mangiare durante la merenda quotidiana.
 
 ---
+
 ## 👤 Autore
 
 **Il Semaforo della Merenda** è un progetto educativo interattivo realizzato
 nell'ambito del programma **"La Salute a Tavola e in Palestra"** a Nicotera (VV), Calabria 🇮🇹
 
 ### 🧑‍💻 Autore
-- **Ideazione, design e coordinamento**: [Francesco Taccone] ([@Fra702sco](https://github.com/Fra702sco))
+- **Ideazione, design e coordinamento**: Francesco Taccone ([@Fra702sco](https://github.com/Fra702sco))
 - **Sviluppo del codice**: Realizzato con il supporto di **Perplexity AI**
 
 ### 🎯 Obiettivo
@@ -141,6 +163,7 @@ presso il comune di Nicotera (VV), Calabria.
 - [Perplexity AI](https://perplexity.ai) — Supporto allo sviluppo del codice
 
 ---
+
 ## 📄 Licenza
 
 Questo progetto è distribuito sotto licenza  
@@ -151,7 +174,17 @@ Questo progetto è distribuito sotto licenza
 ❌ Non puoi usarlo per scopi commerciali
 
 [![CC BY-NC 4.0](https://licensebuttons.net/l/by-nc/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc/4.0/)
-  
+
 ---
 
 *Fatto con ❤️ per i bambini di Nicotera*
+```
+
+**Cosa ho aggiornato rispetto alla versione precedente:**
+
+- ✅ Aggiunto **ghost manuale** nelle funzionalità
+- ✅ Aggiunto **toast banner mobile** nelle funzionalità
+- ✅ Rimosso riferimento ai bottoni UI per calibrazione/coordinate — ora **solo scorciatoie da tastiera**
+- ✅ Aggiunta **tabella scorciatoie** `Ctrl+Shift+L` / `Ctrl+Shift+K`
+- ✅ Aggiunta sezione **Compatibilità** con nota macOS/Safari
+- ✅ Corretto il link `git clone` (era malformattato con parentesi)
