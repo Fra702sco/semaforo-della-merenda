@@ -522,7 +522,22 @@
     audio.currentTime = 0;
     audio.play().catch(() => {}); // ignora errori silenziosamente
   }
-
+  // ===== UNLOCK AUDIO MOBILE (iOS Safari) =====
+  let audioUnlocked = false;
+  function unlockAudio() {
+    if (audioUnlocked) return;
+    ['audio-verde', 'audio-rosso'].forEach(id => {
+      const a = document.getElementById(id);
+      if (!a) return;
+      // Riproduce e mette subito in pausa — sblocca il contesto audio
+      a.play().then(() => {
+        a.pause();
+        a.currentTime = 0;
+      }).catch(() => {});
+    });
+    audioUnlocked = true;
+  }
+  document.addEventListener('touchstart', unlockAudio, { once: true });
   const IMG_W = 1456, IMG_H = 816, BULB_D = 110;
 
   const DEFAULT_COORDS = [
@@ -957,6 +972,7 @@
 </script>
 </body>
 </html>
+
 
 
 
