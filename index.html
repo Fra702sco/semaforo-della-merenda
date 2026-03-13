@@ -621,15 +621,13 @@
 
     const isMac = navigator.platform.toUpperCase().includes('MAC');
 
-    // Ctrl+Shift+0 (Win/Linux) | Cmd+0 (macOS) → Coordinate
     const comboSettings = isMac
       ? (e.metaKey && !e.shiftKey && e.key === '0')
-      : (e.ctrlKey && e.shiftKey && e.key === '0');
-
-    // Ctrl+Shift+9 (Win/Linux) | Cmd+9 (macOS) → Calibratore
+      : (e.ctrlKey && e.shiftKey && (e.key === '0' || e.code === 'Digit0'));
+    
     const comboCalib = isMac
       ? (e.metaKey && !e.shiftKey && e.key === '9')
-      : (e.ctrlKey && e.shiftKey && e.key === '9');
+      : (e.ctrlKey && e.shiftKey && (e.key === '9' || e.code === 'Digit9'));
 
     if (comboSettings) {
       e.preventDefault();
@@ -919,5 +917,6 @@
 </script>
 </body>
 </html>
+
 
 
