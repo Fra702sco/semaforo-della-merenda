@@ -60,7 +60,7 @@ Apri index.html nel browser
 
 ### Metodo 3 — GitHub Pages
 Il gioco è disponibile online all'indirizzo:  
-👉 **[https://fra702.github.io/semaforo-della-merenda](https://fra702.github.io/semaforo-della-merenda)**
+👉 **[https://fra702sco.github.io/semaforo-della-merenda](https://fra702sco.github.io/semaforo-della-merenda)**
 
 ---
 
@@ -87,7 +87,8 @@ semaforo-merenda/
 ├── assets/                                 # Risorse statiche
 │ └── image/                                # Contiene tutte le immagini  
 │ │ └── background/                         # Sfondo e texture
-│ │ │ └── IL-SEMAFORO-DELLA-MERENDA.jpg     # Immagine di sfondo del semaforo
+│ │ │ └── background.jpg                    # Immagine desktop di sfondo del semaforo
+│ │ │ └── background-mobile.jpg             # Immagine mobile di sfondo del semaforo
 ├── README.md                               # Questo file 
 └── LICENSE                                 # Licenza CC BY-NC 4.0
 ```
