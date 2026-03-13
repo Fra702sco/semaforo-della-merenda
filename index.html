@@ -246,8 +246,6 @@
     }
     .btn-ctrl:hover { transform: translateY(-1px); filter: brightness(1.1); }
     #btn-reset    { background: #4caf50; border-color: #45a049; }
-    #btn-calib    { background: #ff9800; border-color: #e68900; }
-    #btn-settings { background: #9c27b0; border-color: #7b1fa2; }
     #btn-about    { background: #2196f3; border-color: #1976d2; }
 
     .mobile-bottom-controls { display: none; }
@@ -304,6 +302,7 @@
       display: flex; align-items: center; gap: 7px; font-size: 20px; cursor: grab;
       box-shadow: 0 3px 10px rgba(0,0,0,0.2); transition: all 0.2s; user-select: none;
       border: 2px solid rgba(220,220,220,0.8);
+      -webkit-user-drag: none; user-drag: none;
     }
     .item:active { cursor: grabbing; }
     .item:hover:not(.correct):not(.wrong) { transform: translateY(-3px) scale(1.06); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
@@ -311,6 +310,11 @@
     .item.wrong   { outline: 3px solid #e53935; background: rgba(255,230,230,0.98); animation: shake 0.4s ease; }
     .item .label  { font-size: 13px; font-weight: bold; color: #333; }
     .item .check  { font-size: 15px; min-width: 18px; text-align: center; }
+    /* Fix macOS drag inclinazione — blocca drag nativo su tutti i figli */
+    .item span, .item .label, .item .check {
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
     @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-5px)} 75%{transform:translateX(5px)} }
 
@@ -459,11 +463,10 @@
     <button id="btn-about-close">✖ Chiudi</button>
   </div>
 
+  <!-- Bottoni settings e calib rimossi dalla UI, accessibili solo da tastiera -->
   <div class="top-controls">
-    <button id="btn-about"    class="btn-ctrl">ℹ️ About</button>
-    <button id="btn-settings" class="btn-ctrl">⚙️ Coordinate</button>
-    <button id="btn-calib"    class="btn-ctrl">🎯 Calibra Luci</button>
-    <button id="btn-reset"    class="btn-ctrl">🔄 Reset</button>
+    <button id="btn-about" class="btn-ctrl">ℹ️ About</button>
+    <button id="btn-reset" class="btn-ctrl">🔄 Reset</button>
   </div>
 
   <div class="main-area">
@@ -541,7 +544,6 @@
     document.getElementById('inp-green-y').value  = bulbCoords[2].y;
     settingsPanel.classList.add('show');
   }
-  document.getElementById('btn-settings').addEventListener('click', e => { e.stopPropagation(); openSettings(); });
   document.getElementById('btn-settings-save').addEventListener('click', () => {
     bulbCoords[0].x = parseInt(document.getElementById('inp-red-x').value)    || bulbCoords[0].x;
     bulbCoords[0].y = parseInt(document.getElementById('inp-red-y').value)    || bulbCoords[0].y;
@@ -589,10 +591,12 @@
       <div class="hint">Step ${calibStep+1} / 3 &nbsp;|&nbsp; ESC per annullare</div>`;
     calibOverlay.classList.add('show');
   }
-  document.getElementById('btn-calib').addEventListener('click', e => {
-    e.stopPropagation(); isCalibrating = true; calibStep = 0;
+
+  function startCalib() {
+    isCalibrating = true; calibStep = 0;
     document.body.classList.add('calibrating'); showCalibStep();
-  });
+  }
+
   document.body.addEventListener('click', e => {
     if (!isCalibrating) return;
     const vw = window.innerWidth;
@@ -609,11 +613,45 @@
     setTimeout(() => f.remove(), 520);
     calibStep++; showCalibStep();
   });
+
+  // ===== KEYBOARD SHORTCUTS =====
   document.addEventListener('keydown', e => {
+    // ESC — annulla calibrazione
     if (e.key === 'Escape' && isCalibrating) {
       isCalibrating = false;
       document.body.classList.remove('calibrating');
       calibOverlay.classList.remove('show');
+      return;
+    }
+
+    const isMac = navigator.platform.toUpperCase().includes('MAC');
+
+    // Ctrl+Shift+0 (Win/Linux) | Cmd+0 (macOS) → Coordinate
+    const comboSettings = isMac
+      ? (e.metaKey && !e.shiftKey && e.key === '0')
+      : (e.ctrlKey && e.shiftKey && e.key === '0');
+
+    // Ctrl+Shift+9 (Win/Linux) | Cmd+9 (macOS) → Calibratore
+    const comboCalib = isMac
+      ? (e.metaKey && !e.shiftKey && e.key === '9')
+      : (e.ctrlKey && e.shiftKey && e.key === '9');
+
+    if (comboSettings) {
+      e.preventDefault();
+      settingsPanel.classList.contains('show')
+        ? settingsPanel.classList.remove('show')
+        : openSettings();
+    }
+
+    if (comboCalib) {
+      e.preventDefault();
+      if (isCalibrating) {
+        isCalibrating = false;
+        document.body.classList.remove('calibrating');
+        calibOverlay.classList.remove('show');
+      } else {
+        startCalib();
+      }
     }
   });
 
@@ -715,7 +753,7 @@
     const text   = document.getElementById('toast-text');
     clearTimeout(toastTimer);
     banner.classList.remove('show', 'green', 'red');
-    void banner.offsetWidth; // forza reflow per rianimare
+    void banner.offsetWidth;
     if (type === 'ok') {
       banner.classList.add('green');
       icon.textContent = '✅';
@@ -810,6 +848,7 @@
     });
   });
 
+  // Blocca drag nativo browser (incluso Safari/macOS)
   document.addEventListener('dragstart', e => {
     if (e.target.closest('.item')) e.preventDefault();
   });
