@@ -639,8 +639,8 @@
     const isMac = navigator.platform.toUpperCase().includes('MAC');
 
     const comboSettings = isMac
-      ? (e.metaKey && !e.shiftKey && e.key === '0')
-      : (e.ctrlKey && e.shiftKey && (e.key === '0' || e.code === 'Digit0'));
+      ? (e.metaKey && !e.shiftKey && e.key === '8')
+      : (e.ctrlKey && e.shiftKey && (e.key === '8' || e.code === 'Digit8'));
     
     const comboCalib = isMac
       ? (e.metaKey && !e.shiftKey && e.key === '9')
@@ -934,6 +934,7 @@
 </script>
 </body>
 </html>
+
 
 
 
